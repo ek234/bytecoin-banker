@@ -104,6 +104,7 @@ int Attack(Block *Bl) //pass the tail pointer to the blockchain
     return 0;
 }
 
+//incomplete. will finish after hash function has been written                            
 int Validate(Block B) //pass the tail pointer
 {
     int flag = 1;
