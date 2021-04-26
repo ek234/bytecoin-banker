@@ -1,64 +1,51 @@
-#include "User.h"
+#include "./user.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-int __find_id(char name[], char id[])
+
+int __find_id()
 {
     srand(time(NULL));
-    int len = strlen(name);
-    strcpy(id, name);
     int id_num = rand() % 1000;
-    int num = 10;
-    for (int i = len + 2; i >= len; --i)
-    {
-        id[i] = (id_num % num) / (num / 10);
-        num *= 10;
-    }
-    id[len + 3] = '\0';
     return id_num;
 }
-int __check(ptr_user user_list[], int hash_key, char id[])
+int __check(ptr_user user_list[], int hash_key)
 {
     ptr_user temp = user_list[hash_key];
     if (temp == NULL)
         return 1;
     else
-    {
-        while (temp->next != NULL)
-        {
-            if (strcmp(temp->next->id, id) == 0)
-                return -1;
-            temp = temp->next;
-        }
-    }
-    return 1;
+        return -1;
 }
 ptr_user register_usr(ptr_user user_list[], char name[], unsigned long int init_bal)
 {
-    char id[24];
+    int id;
     int check_val;
-    int hash_key;
+    time_t t = time(NULL);
     do
     {
-        hash_key = __find_id(name, id);
-        check_val = __check(user_list, hash_key, id);
+        id = __find_id();
+        check_val = __check(user_list, id);
     } while (check_val == -1);
+    int hash_key = id;
     ptr_user temp = user_list[hash_key];
-    if (user_list[hash_key] == NULL)
-    {
-        user_list[hash_key] = (ptr_user)malloc(sizeof(user));
-        user_list[hash_key]->bal = 0;
-        user_list[hash_key]->next = NULL;
-    }
 
-    while (temp->next != NULL)
-        temp = temp->next;
-    ptr_user uid = (ptr_user)malloc(sizeof(user));
-    uid->bal = init_bal;
-    strcpy(uid->id, id);
-    strcpy(uid->name, name);
-    uid->next = NULL;
-    temp->next = uid;
+    user_list[hash_key] = (ptr_user)malloc(sizeof(user));
+    user_list[hash_key]->bal = 0;
+
+    ptr_user temp_user = (ptr_user)malloc(sizeof(user));
+    temp_user->bal = init_bal;
+    temp_user->id = id;
+    strcpy(temp_user->name, name);
+    temp_user->reg_time = *localtime(&t);
+    temp = temp_user;
     return user_list;
+}
+unsigned long int delete_user(ptr_user user_list, int id)
+{
+    unsigned long int bal = user_list[id].bal;
+    ptr_user temp = &user_list[id];
+    free(temp);
+    return bal;
 }
