@@ -26,7 +26,7 @@ struct UserList
     int UID;
     double balance;
     Transact T; //we can also store the transaction history in an array
-    //time_t join_time;
+    time_t join_time;
     Users next;
 };
 
@@ -39,7 +39,7 @@ struct Transaction
     int R_UID;
     double tr_amount;
     Transact next;
-    //time_t time;
+    time_t time;
 };
 
 typedef struct BlockChain BlockChain;
@@ -59,6 +59,8 @@ struct BlockChain
     Block prev;
 };
 
+
+
 void initBlockArray();
 void updateBlockArray(Block *Bl);
 
@@ -66,6 +68,7 @@ Block emptyBlock(Transact T);
 Block initBlock(ElemType prev_block_hash, int block_num);
 Transact initTransaction();
 Users initUsers();
+
 
 ElemType Hash();
 
