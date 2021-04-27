@@ -10,6 +10,8 @@
 int main()
 {
 
+	srand((unsigned) time(NULL));		//seeding randomizer for other functions
+
 	printf("Welcome to %s\n\n", APP_NAME);
 	printhelp();
 

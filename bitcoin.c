@@ -85,23 +85,20 @@ Block createBlock(Block prev, Transact T, int block_num) //we will pass the head
     return current;
 }
 
-int Attack(Block *Bl) //pass the tail pointer to the blockchain
+int Attack()
 {
-    Block B = *Bl;
-
     int x = rand() % BLOCK_SIZE;
 
-    for (int i = 0; i < 51; i++)
-    {
-        if (BlockArray[i].Nonce == x)
-        {
-            int y = srand() % 50;
-            BlockArray[i].Nonce = y;
-            BlockArray[i].B->Nonce = y;
-            return 1; //block attacked
-        }
-    }
-    return 0;
+	if (BlockArray[x]!=NULL)
+	{
+		int r = rand() % (NONCE_SIZE - 1);
+		r++;	//Now, r is a random int from 1 to NONCE_SIZE-1 inclusive
+		//	This ensures that Nonce can not remain the same
+		BlockArray[i].Nonce = ( BlockArray[i].Nonce + r ) % NONCE_SIZE;
+		return x;					//num of block attacked
+	}
+
+    return -1;							//no block was attacked
 }
 
 //incomplete. will finish after hash function has been written                            
