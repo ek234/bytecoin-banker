@@ -9,13 +9,13 @@
 //loan
 //withdrawal
 
-struct Array *PtrBlock = (struct Array *)malloc(50 * sizeof(BlockArray));
-
 time_t time;
 srand((unsigned)time(&time));
 
 #define NONCE_SIZE 500
 #define BLOCK_SIZE 50
+
+struct Array *PtrBlock = (struct Array *)malloc(BLOCK_SIZE * sizeof(BlockArray));
 
 void initBlockArray() //array of pointers to access the blocks in O(1)time. Need to initialise in main()
 {
