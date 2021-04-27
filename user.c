@@ -43,7 +43,7 @@ Users register_usr(Users user_list[], double init_bal)
     temp_user->balance = init_bal;
     temp_user->UID = id;
 
-    temp_user->join_time = *localtime(&t);   //ask ishan to change the struct  
+    temp_user->join_time = *localtime(&t);     
 
     
     temp = temp_user;
