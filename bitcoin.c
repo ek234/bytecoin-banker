@@ -95,30 +95,16 @@ int Attack()
 {
     int x = rand() % BLOCK_SIZE;
 
-<<<<<<< HEAD
 	if (BlockArray[x]!=NULL)
 	{
 		int r = rand() % (NONCE_SIZE - 1);
 		r++;	//Now, r is a random int from 1 to NONCE_SIZE-1 inclusive
 		//	This ensures that Nonce can not remain the same
-		BlockArray[i].Nonce = ( BlockArray[i].Nonce + r ) % NONCE_SIZE;
+		BlockArray[x].Nonce = ( BlockArray[x].Nonce + r ) % NONCE_SIZE;
 		return x;					//num of block attacked
 	}
 
     return -1;							//no block was attacked
-=======
-    for (int i = 0; i < 51; i++)
-    {
-        if (PtrBlock[i].Nonce == x)
-        {
-            int y = srand() % 50;
-            PtrBlock[i].Nonce = y;
-            PtrBlock[i].B->Nonce = y;
-            return 1; //block attacked
-        }
-    }
-    return 0;
->>>>>>> origin/hitesh
 }
 
 //incomplete. will finish after hash function has been written
