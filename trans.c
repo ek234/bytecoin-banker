@@ -31,7 +31,7 @@ Transact *tarnsfer(UserList *sender, UserList *reciver, double amt)
     temp->R_UID = reciver->UID;
     temp->S_UID = sender->UID;
     temp->tr_amount = amt;
-    //temp->time = *localtime(&t);
+    temp->time = *localtime(&t);
     temp->next = NULL;
 
     __add_trans_in_usr(sender, temp);

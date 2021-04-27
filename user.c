@@ -42,13 +42,10 @@ Users register_usr(Users user_list[], double init_bal)
     Users temp_user = (Users)malloc(sizeof(Users));
     temp_user->balance = init_bal;
     temp_user->UID = id;
-    /*///////////////////////////////
-*  error
-*
-*
+
     temp_user->join_time = *localtime(&t);   //ask ishan to change the struct  
 
-    */
+    
     temp = temp_user;
     return user_list;
 }
