@@ -66,7 +66,6 @@ Users initUsers();
 
 ElemType Hash();
 
-int AddUser();                                            //return 1 if addition is successful
 int Transaction(int S_uid, int R_uid, double amount);     //return -1 if transaction declined
 Block createBlock(Block prev, Transact T, int block_num); //we will pass the header to the block, and that of the transaction list
 int Attack(Block *Bl);

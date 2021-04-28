@@ -24,12 +24,6 @@ int main()
 		switch( command[0] )
 		{
 			case 'a':
-				if( strcmp( command, "add user" ) )
-				{
-					printf("Your generated unique ID is: ");
-					AddUser();
-					break;
-				}
 				if( strcmp( command, "attack" ) )
 				{
 					printf("Let's see who's taking the Majority Control!\n");
@@ -122,7 +116,6 @@ exit:
     ?	initUsers();
     ?	Hash();
 
-    d	AddUser();
     d	Transaction(int S_uid, int R_uid, double amount);
     d	createBlock(Block prev, Transact T, int block_num);
     d	Attack(Block* B1);
