@@ -10,7 +10,6 @@ struct data
     int new_usr;
     int old_trans;
     int new_trans;
-    double capital;
     double coins_left;
 };
 double upd_val(data_ptr det, double val);
