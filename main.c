@@ -6,11 +6,16 @@
 
 #define APP_NAME "temp name"
 #define command_length 50
+#define INIT_MAX_USERS 50
 
 int main()
 {
 
 	srand((unsigned) time(NULL));		//seeding randomizer for other functions
+
+//	inits
+	Users* userlist = (Users*) malloc( INIT_MAX_USERS * sizeof(Users) );	//array of users
+//
 
 	printf("Welcome to %s\n\n", APP_NAME);
 	printhelp();
@@ -43,8 +48,10 @@ int main()
 			case 'r':
 				if( strcmp( command, "register user" ) )
 				{
-					printf("Enter the user details:- \n Your unique ID: \n Initial Balance: \n");
-					register_usr(user_list[], name[], bal);
+					printf("Enter the initial amount to diposit: $");
+					double x;
+					scanf("%lf", &x);
+					userlist = register_usr(userlist, x);
 					break;
 				}
 //				goto invalid_command;
@@ -53,13 +60,30 @@ int main()
 			case 't':
 				if( strcmp( command, "transact" ) )
 				{
-					printf("The transaction details: "); //Sender UID, Receiver UID, Amount Transferred
-					Transaction(S_uid, R_uid,  amount);
+					int s_uid, r_uid;
+					double amount;
+					printf("Starting transaction\n");
+					printf("Enter sender's id: ");
+					scanf("%d", &s_uid);
+					printf("Enter reciever's id: ");
+					scanf("%d", &r_uid);
+					printf("Enter amount to transfer: ");
+					scanf("%d", &amount);
+
+					Transact* current_transaction = Transaction(s_uid, r_uid, amount);
+					if( current_transaction==0 )
+						printf("Transaction failed.\n");
+					else
+					{
+						printf("Transaction successful.");
+					}
+					
 					break;
 				}
 //				goto invalid_command;
 				goto default;
 
+/*
 			case 'c':
 				if( strcmp( command, "create block" ) )
 				{
@@ -69,6 +93,7 @@ int main()
 				}
 //				goto invalid_command;
 				goto default;
+*/
 
 			case 'v':
 				if( strcmp( command, "validity check" ) )
