@@ -95,12 +95,13 @@ int Attack()
 {
     int x = rand() % BLOCK_SIZE;
 
-	if (BlockArray[x]!=NULL)
+	if ( PtrBlock[x].B != NULL )
 	{
 		int r = rand() % (NONCE_SIZE - 1);
 		r++;	//Now, r is a random int from 1 to NONCE_SIZE-1 inclusive
 		//	This ensures that Nonce can not remain the same
-		BlockArray[x].Nonce = ( BlockArray[x].Nonce + r ) % NONCE_SIZE;
+		PtrBlock[x].Nonce = ( PtrBlock[x].Nonce + r ) % NONCE_SIZE;
+		PtrBlock[x].B->Nonce = PtrBlock[x].Nonce;
 		return x;					//num of block attacked
 	}
 
