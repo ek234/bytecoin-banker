@@ -34,7 +34,13 @@ int main()
 				{
 					printf("Let's see who's taking the Majority Control!\n");
 					printf("ATTACK!!!\n");
-					Attack(B1);
+
+					int x = Attack();
+					if( x==-1 )
+						printf("Attack failed:(\n");
+					else
+						printf("Successful att4ck. Compromised block number: %d\n", x);
+
 					break;
 				}
 //				goto invalid_command;
