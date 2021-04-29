@@ -27,7 +27,7 @@ Transact *tarnsfer(UserList *sender, UserList *reciver, double amt)
     sender->balance -= amt;
     reciver->balance += amt;
 
-    Transact temp = (Transact)mallco(sizeof(Transaction));
+    Transact temp = (Transact)malloc(sizeof(Transaction));
     temp->R_UID = reciver->UID;
     temp->S_UID = sender->UID;
     temp->tr_amount = amt;

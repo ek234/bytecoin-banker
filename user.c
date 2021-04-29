@@ -34,8 +34,8 @@ Users register_usr(Users user_list[], double init_val, double value)
     Users temp = user_list[hash_key];
 
     /****************************************** 
-/*    adds user details in user directory *
-/******************************************/
+    /*  adds user details in user directory   *
+    /******************************************/
 
     user_list[hash_key] = (Users)malloc(sizeof(UserList));
     user_list[hash_key]->balance = 0;
@@ -47,7 +47,9 @@ Users register_usr(Users user_list[], double init_val, double value)
     temp_user->join_time = *localtime(&t);
 
     temp = temp_user;
-    return user_list;
+
+    ///// returns pointer to newly registered users details
+    return user_list[id];
 }
 double delete_user(Users user_list[], int id, double value)
 {
