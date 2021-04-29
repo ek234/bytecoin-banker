@@ -9,13 +9,14 @@
 //loan
 //withdrawal
 
+struct Array *PtrBlock = (struct Array *)malloc(50 * sizeof(BlockArray));
+
 time_t time;
+time(&time);
 srand((unsigned)time(&time));
 
 #define NONCE_SIZE 500
 #define BLOCK_SIZE 50
-
-struct Array *PtrBlock = (struct Array *)malloc(BLOCK_SIZE * sizeof(BlockArray));
 
 void initBlockArray() //array of pointers to access the blocks in O(1)time. Need to initialise in main()
 {
@@ -28,7 +29,7 @@ void initBlockArray() //array of pointers to access the blocks in O(1)time. Need
 
 void updateBlockArray(Block *Bl) //updating the block array whenever a new block is added to the chain.
 {
-    Block B = *Bl;
+    struct BlockChain *B = *Bl;
 
     int num = B->block_num;
 
@@ -91,19 +92,21 @@ Block createBlock(Block prev, Transact T, int block_num) //we will pass the head
     return current;
 }
 
-int Attack(Block *Bl) //pass the tail pointer to the blockchain
+int Attack(struct BlockChain **Bl) //pass the tail pointer to the blockchain
 {
-    Block B = *Bl;
+    struct BlockChain *B = *Bl;
 
     int x = rand() % BLOCK_SIZE;
 
-    for (int i = 0; i < 51; i++)
+    for (int i = 0; i < 50; i++)
     {
         if (PtrBlock[i].Nonce == x)
         {
             int y = srand() % 50;
             PtrBlock[i].Nonce = y;
             PtrBlock[i].B->Nonce = y;
+
+            prinf("The blockchain was attacked at %s\n", ctime(&time));
             return 1; //block attacked
         }
     }
@@ -128,6 +131,11 @@ int Validate(Block B) //pass the tail pointer
             //adjusting value of nonce of prev block
         }
     }
+
+    if (flag == 1)
+        printf("The blockchain was tested valid at %s", ctime(&time));
+    else
+        prinf("The blockchain was tested invalid at %s\n", ctime(&time));
 
     return flag;
 }
