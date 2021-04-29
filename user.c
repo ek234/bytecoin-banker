@@ -1,4 +1,5 @@
 #include "./user.h"
+#include "./trans.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -18,7 +19,7 @@ int __check(Users user_list[], int hash_key)
     else
         return -1;
 }
-Users register_usr(Users user_list[], double init_bal)
+Users register_usr(Users user_list[], double init_val, double value)
 {
     int id;
     int check_val;
@@ -32,7 +33,7 @@ Users register_usr(Users user_list[], double init_bal)
     int hash_key = id;
     Users temp = user_list[hash_key];
 
-/****************************************** 
+    /****************************************** 
 /*    adds user details in user directory *
 /******************************************/
 
@@ -40,18 +41,17 @@ Users register_usr(Users user_list[], double init_bal)
     user_list[hash_key]->balance = 0;
 
     Users temp_user = (Users)malloc(sizeof(Users));
-    temp_user->balance = init_bal;
+    initilize_bal(temp_user, init_val, value);
     temp_user->UID = id;
 
-    temp_user->join_time = *localtime(&t);     
+    temp_user->join_time = *localtime(&t);
 
-    
     temp = temp_user;
     return user_list;
 }
-double delete_user(Users user_list[], int id)
+double delete_user(Users user_list[], int id, double value)
 {
-    double bal = user_list[id]->balance;
+    double bal = capital_value(user_list[id], value);
     Users temp = user_list[id];
     free(temp);
     return bal;
