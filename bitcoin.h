@@ -3,12 +3,16 @@
 
 #include <stdio.h>
 #include <time.h>
+typedef struct tm _time;
 
 typedef int ElemType;
-
-//hash table for storing data of users
-//linked lists for storing transactions
-//linked list for blockchain
+typedef struct Transaction Transaction;
+typedef struct Transaction *Transact;
+typedef struct UserList UserList;
+typedef UserList *Usernext;
+typedef struct BlockChain BlockChain;
+typedef BlockChain *Block;
+struct Array BlockArray;
 
 struct Array
 {
@@ -16,22 +20,14 @@ struct Array
     Block *B;
 };
 
-struct Array BlockArray;
-
-typedef struct UserList UserList;
-typedef UserList *Users;
-
 struct UserList
 {
     int UID;
     double balance;
     Transact T; //we can also store the transaction history in an array
-    time_t join_time;
-    Users next;
+    _time join_time;
+    Usernext next;
 };
-
-typedef struct Transaction Transaction;
-typedef struct Transaction *Transact;
 
 struct Transaction
 {
@@ -39,11 +35,9 @@ struct Transaction
     int R_UID;
     double tr_amount;
     Transact next;
-    time_t time;
+    _time time;
 };
 
-typedef struct BlockChain BlockChain;
-typedef BlockChain *Block;
 
 Block head;
 Block tail;
@@ -72,7 +66,6 @@ Users initUsers();
 
 ElemType Hash();
 
-int AddUser();                                            //return 1 if addition is successful
 int Transaction(int S_uid, int R_uid, double amount);     //return -1 if transaction declined
 Block createBlock(Block prev, Transact T, int block_num); //we will pass the header to the block, and that of the transaction list
 int Attack(Block *Bl);
