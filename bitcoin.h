@@ -10,6 +10,7 @@ typedef struct Transaction Transaction;
 typedef struct Transaction *Transact;
 typedef struct UserList UserList;
 typedef UserList *Usernext;
+typedef Usernext Users;
 typedef struct BlockChain BlockChain;
 typedef BlockChain *Block;
 struct Array BlockArray;

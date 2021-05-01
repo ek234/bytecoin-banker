@@ -14,4 +14,4 @@ struct data
 double upd_val(data_ptr det, double val);
 double after_attack(double val);
 
-#endif __UPDT_VAL_H__
+#endif 
