@@ -2,7 +2,9 @@
 #define __BITCOIN_H
 
 #include <stdio.h>
+#include <stdbool.h>
 #include <time.h>
+
 typedef struct tm _time;
 
 typedef int ElemType;
@@ -65,6 +67,6 @@ ElemType Hash();
 int Transaction(int S_uid, int R_uid, double amount);     //return -1 if transaction declined
 Block createBlock(Block prev, Transact T, int block_num); //we will pass the header to the block, and that of the transaction list
 int Attack(Block *Bl);
-int Validate(Block B);
+bool Validate(Block B);
 
 #endif

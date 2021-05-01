@@ -109,23 +109,27 @@ int Attack()
 }
 
 //incomplete. will finish after hash function has been written
-int Validate(Block B) //pass the tail pointer
+bool Validate() //pass the tail pointer
 {
-    int flag = 1;
+    bool flag_invalid_chain = 0;
 
-    while (B->prev->hash_val != 0)
+	Block it = tail;
+    while (it->prev != NULL)
     {
-        if (B->prev_block_hash == B->prev->hash_val)
+        if (it->prev_block_hash != hash(it->prev))			//block has been attacked.
         {
-            B = B->prev;
-            continue;
+			flag_invalid_chain = 1;
+			//adjusting value of nonce of prev block
+			for(it->prev->nonce = 1; it->prev->nonce < NONCE_MAX; it->prev->nonce += 1 )
+			{
+				if(it->prev_block_hash == hash(it->prev))
+					goto nonce_fixed;
+			}
         }
-        else
-        {
-            flag = 0; //block has been attacked.
-            //adjusting value of nonce of prev block
-        }
+
+		nonce_fixed:;
+		it = it->prev;
     }
 
-    return flag;
+    return flag_invalid_chain;		//returns 0 to show no errors in the block chain
 }

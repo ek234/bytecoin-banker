@@ -75,7 +75,12 @@ int main()
 						printf("Transaction failed.\n");
 					else
 					{
-						printf("Transaction successful.");
+						printf("Transaction successful.\n");
+
+
+						//put check to see if number of transactions are greater than 50
+						// if yes, the create a new block and append it to the block chain
+
 					}
 					
 					break;
@@ -83,23 +88,11 @@ int main()
 //				goto invalid_command;
 				goto default;
 
-/*
-			case 'c':
-				if( strcmp( command, "create block" ) )
-				{
-					printf("New Block: ");
-					createBlock(prev, T, block_num);
-					break;
-				}
-//				goto invalid_command;
-				goto default;
-*/
-
 			case 'v':
 				if( strcmp( command, "validity check" ) )
 				{
-					printf("--:Checking Validity:--");
-					Validate(B);
+					printf("--:Checking Validity:--\n");
+					Validate();
 					break;
 				}
 //				goto invalid_command;
