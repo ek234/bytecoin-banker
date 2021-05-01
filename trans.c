@@ -1,5 +1,6 @@
 #include "./trans.h"
-
+#include <stdlib.h>
+#include <stdio.h>
 void __add_trans_in_usr(UserList *user, Transact transfer)
 {
     Transact temp = user->T;
@@ -15,7 +16,7 @@ void __add_trans_in_usr(UserList *user, Transact transfer)
 
     temp->next = transfer;
 }
-Transact *tarnsfer(UserList *sender, UserList *reciver, double amt)
+Transact tarnsfer(UserList *sender, UserList *reciver, double amt)
 {
     //condition if sufficient bal is avaliable
     if (sender->balance < amt)

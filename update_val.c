@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "./update_val.h"
+
 #define attack -2.00
 
 double __abs(double x)
@@ -27,7 +29,8 @@ double upd_val(data_ptr det, double val)
     *      coin ==> value decreases                                                         *
     *   3. If no/less transactions ==> High demand people ==> val increase                  *
     *                                                                                       *
-    *////////////////////////////////////////////////////////////////////////////////////////
+    */
+    ///////////////////////////////////////////////////////////////////////////////////////
 
     if (__abs(usr_diff) >= 10 && __abs(per_uc) >= 10)
     {
