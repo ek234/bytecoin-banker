@@ -7,7 +7,6 @@
 
 int __find_id()
 {
-    srand(time(NULL));
     int id_num = rand() % 1000;
     return id_num;
 }
