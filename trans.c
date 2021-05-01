@@ -1,4 +1,4 @@
-#include <./trans.h>
+#include "./trans.h"
 
 void __add_trans_in_usr(UserList *user, Transact transfer)
 {
@@ -27,7 +27,7 @@ Transact *tarnsfer(UserList *sender, UserList *reciver, double amt)
     sender->balance -= amt;
     reciver->balance += amt;
 
-    Transact temp = (Transact)mallco(sizeof(Transaction));
+    Transact temp = (Transact)malloc(sizeof(Transaction));
     temp->R_UID = reciver->UID;
     temp->S_UID = sender->UID;
     temp->tr_amount = amt;
@@ -41,20 +41,16 @@ Transact *tarnsfer(UserList *sender, UserList *reciver, double amt)
     return temp;
 }
 
-void initilize_bal(UserList *user, double deposit)
+void initilize_bal(UserList *user, double deposit, double value)
 {
-    /**************************************
-    *  need to work on current value of   *
-    *  bitcoin based on which parameter   *
-    *  it will need also it can be passed  *
-    ***************************************/
-    double value = current_val();
+    /*******************************************
+    *  Will initilize no of bitcoins in account *
+    *********************************************/
 
     user->balance = deposit / value;
 }
 
-double capital_value(UserList *user)
+double capital_value(UserList *user, double value)
 {
-    double value = current_val();
     return value * user->balance;
 }

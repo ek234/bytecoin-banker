@@ -38,7 +38,6 @@ struct Transaction
     _time time;
 };
 
-
 Block head;
 Block tail;
 
@@ -53,8 +52,6 @@ struct BlockChain
     Block prev;
 };
 
-
-
 void initBlockArray();
 void updateBlockArray(Block *Bl);
 
@@ -62,7 +59,6 @@ Block emptyBlock(Transact T);
 Block initBlock(ElemType prev_block_hash, int block_num);
 Transact initTransaction();
 Users initUsers();
-
 
 ElemType Hash();
 
