@@ -10,6 +10,19 @@
 
 long int Ntransactions;
 
+void printhelp(){
+	printf("\n\t\t\t\tNAMASKAAR🙏\n\t\t\tWe are here to help you!\n\n\n");
+	printf("Instructions: -\nUse the following commands to move ahead.\n");
+	printf("1. Press 'r' to register your details.\n");
+	printf("2. Press 'a' to see your situation with the equity (Attack).\n");
+	printf("3. Press 't' to fill your transaction details.\n");
+	printf("4. Press 'v' to check the validity of your Block Chain.\n");
+	printf("5. Press 'h' to return to the set of instructions.\n");
+	printf("6. Press 'e' to exit from the page.\n");
+	printf("\n\t\t\t\tHave a smooth Experience here. Stay Safe🌻\n");
+}
+	   
+	       
 int main()
 {
 
@@ -98,8 +111,15 @@ int main()
 			case 'v':
 				if( strcmp( command, "validity check" ) )
 				{
+					bool = v;
+					v = Validate();
 					printf("--:Checking Validity:--\n");
-					Validate();
+					if(v = 0){
+						printf("\nNO ERROR\n\t\t\tCheers!!\n");
+					}
+					else if(v = 1){
+						printf("\nYour Block Chain needs Fixing\n");
+					}
 					break;
 				}
 //				goto invalid_command;
