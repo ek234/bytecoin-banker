@@ -1,7 +1,7 @@
 #include "./trans.h"
 #include <stdlib.h>
 #include <stdio.h>
-void __add_trans_in_usr(UserList *user, Transact transfer)
+Users __add_trans_in_usr(Users user, Transact transfer)
 {
     Transact temp = user->T;
     if (temp == NULL)
@@ -15,43 +15,38 @@ void __add_trans_in_usr(UserList *user, Transact transfer)
         temp = temp->next;
 
     temp->next = transfer;
+    return user;
 }
-Transact tarnsfer(UserList *sender, UserList *reciver, double amt)
+Transact tarnsfer(Users *sender, Users *reciver, double amt)
 {
     //condition if sufficient bal is avaliable
-    if (sender->balance < amt)
+    Users temp_s = *sender, temp_r = *reciver;
+
+    if (temp_s->balance < amt || *sender == NULL || *reciver == NULL)
 
         return NULL; //return null pointer if amount is not present
 
     time_t t = time(NULL); // stores current is seconds
 
-    sender->balance -= amt;
-    reciver->balance += amt;
+    temp_s->balance -= amt;
+    temp_r->balance += amt;
 
     Transact temp = (Transact)malloc(sizeof(Transaction));
-    temp->R_UID = reciver->UID;
-    temp->S_UID = sender->UID;
+    temp->R_UID = temp_r->UID;
+    temp->S_UID = temp_s->UID;
     temp->tr_amount = amt;
     temp->time = *localtime(&t);
     temp->next = NULL;
 
-    __add_trans_in_usr(sender, temp);
-    __add_trans_in_usr(reciver, temp);
+    temp_s = __add_trans_in_usr(temp_s, temp);
+    temp_r = __add_trans_in_usr(temp_r, temp);
+    *sender = temp_s;
+    *reciver = temp_r;
 
     // return address of transaction so that is can be adden in block chain
     return temp;
 }
-
-void initilize_bal(UserList *user, double deposit, double value)
+/* int main()
 {
-    /*******************************************
-    *  Will initilize no of bitcoins in account *
-    *********************************************/
-
-    user->balance = deposit / value;
-}
-
-double capital_value(UserList *user, double value)
-{
-    return value * user->balance;
-}
+    printf("hello world\n");
+} */
