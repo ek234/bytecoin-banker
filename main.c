@@ -8,6 +8,8 @@
 #define command_length 50
 #define INIT_MAX_USERS 50
 
+long int Ntransactions;
+
 int main()
 {
 
@@ -35,8 +37,8 @@ int main()
 					printf("ATTACK!!!\n");
 
 					int x = Attack();
-					if( x==-1 )
-						printf("Attack failed:(\n");
+					if( x == -1 )
+						printf("Attack failed :(\n");
 					else
 						printf("Successful att4ck. Compromised block number: %d\n", x);
 
@@ -69,9 +71,14 @@ int main()
 					scanf("%d", &r_uid);
 					printf("Enter amount to transfer: ");
 					scanf("%d", &amount);
+					
+					while(Ntransactions > 50)
+					{
+						createBlock(prev, T, block_num);
+					}
 
 					Transact* current_transaction = Transaction(s_uid, r_uid, amount);
-					if( current_transaction==0 )
+					if( current_transaction == 0 )
 						printf("Transaction failed.\n");
 					else
 					{
