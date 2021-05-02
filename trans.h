@@ -3,8 +3,6 @@
 #include "./bitcoin.h"
 #include "./user.h"
 
-Transact tarnsfer(UserList *sender, UserList *reciver, double amt);
-void initilize_bal(UserList *user, double deposit, double value);
-double capital_value(UserList *user, double value);
+Transact tarnsfer(Users *sender, Users *reciver, double amt);
 
-#endif 
+#endif

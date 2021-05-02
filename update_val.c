@@ -12,8 +12,9 @@ double __abs(double x)
         return x;
 }
 
-double upd_val(data_ptr det, double val)
+double upd_val(data_ptr *detail, double val)
 {
+    data_ptr det = *detail;
     int usr_diff = det->new_usr - det->old_usr;
     int trans_diff = det->new_trans - det->old_trans;
     double usr_change, trans_change;
@@ -51,6 +52,7 @@ double upd_val(data_ptr det, double val)
     //updates number of user adn transactions
     det->new_usr = det->old_usr;
     det->new_trans = det->old_trans;
+    detail = &det;
     return val + trans_change + usr_change;
 }
 
@@ -61,3 +63,7 @@ double after_attack(double val)
     double change = (val * attack) / 100.00;
     return val + change;
 }
+/* int main()
+{
+    printf("hello world\n");
+} */
