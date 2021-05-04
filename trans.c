@@ -46,7 +46,3 @@ Transact tarnsfer(Users *sender, Users *reciver, double amt)
     // return address of transaction so that is can be adden in block chain
     return temp;
 }
-/* int main()
-{
-    printf("hello world\n");
-} */
