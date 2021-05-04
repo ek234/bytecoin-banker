@@ -191,7 +191,14 @@ int main()
 						printf("\nNO ERROR\n\t\t\tCheers!!\n");
 					}
 					else if(v = 1){
-						printf("\nYour Block Chain needs Fixing\n");
+						printf("\nBlock Chain needs Fixing\n");
+						printf("Resolving errors");
+						for( int i=0; i<5; i++ )
+						{
+							delay(500);
+							printf(".");
+						}
+						printf("\nAll the errors have been resolved.\n");
 					}
 					break;
 				}
