@@ -32,6 +32,7 @@ int main()
 	int block_num = 0;
 	initBlockArray();
 	int Ntransactions = 0;
+	double bit_value = 100;
 //
 
 	printf("Welcome to %s\n\n", APP_NAME);
@@ -55,17 +56,73 @@ int main()
 					if( x == -1 )
 						printf("Attack failed :(\n");
 					else
+					{
 						printf("Successful att4ck. Compromised block number: %d\n", x);
+						bit_value = after_attack(bit_value);
+					}
 
 					break;
 				}
 //				goto invalid_command;
 				goto default;
 
-			case 'r':
-				if( strcmp( command, "register user" ) )
+			case 'b':
+				if( strcmp( command, "balance" ) )
 				{
-					printf("Enter the initial amount to diposit: $");
+					printf("Enter the user id: ");
+					int uid;
+					scanf("%d", &uid);
+					User temp = find_user(userlist, uid);
+					double bal = temp->balance;
+					if( temp==NULL )
+					{
+						printf("Error: user id doesn't exist\n");
+					}
+					else
+					{
+						printf("Current balance: %lfBitcoin\n", bal);
+					}
+					break;
+				}
+//				goto invalid_command;
+				goto default;
+
+			case 'c':
+				if( strcmp( command, "check" ) )
+				{
+					bit_value = upd_val( ..., bit_value );
+					printf("Current Value of bitcoin: %lf\n", bit_value);
+					break;
+				}
+//				goto invalid_command;
+				goto default;
+
+			case 'u':
+				if( strcmp( command, "unregister" ) )
+				{
+					printf("Enter the user id: ");
+					int uid;
+					scanf("%d", &uid);
+					bit_value = upd_val( ..., bit_value );
+					double bal = delete_user(userlist, uid, bit_value);
+					if( bal==-1 )
+					{
+						printf("Error: user id doesn't exist\n");
+					}
+					else
+					{
+						printf("Account successfully unregistered.\n");
+						printf("Returning balance: %lf\n", bal);
+					}
+					break;
+				}
+//				goto invalid_command;
+				goto default;
+
+			case 'r':
+				if( strcmp( command, "register" ) )
+				{
+					printf("Enter the initial amount to diposit: $\n");
 					double x;
 					scanf("%lf", &x);
 					Users* temp = register_usr(userlist, x);
@@ -130,7 +187,7 @@ int main()
 					bool = v;
 					v = Validate();
 					printf("--:Checking Validity:--\n");
-					if(v = 0){
+					if(v == 0){
 						printf("\nNO ERROR\n\t\t\tCheers!!\n");
 					}
 					else if(v = 1){
