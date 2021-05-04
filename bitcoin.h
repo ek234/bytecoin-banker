@@ -63,7 +63,7 @@ Block initBlock(ElemType prev_block_hash, int block_num);
 Transact initTransaction();
 Users initUsers();
 
-ElemType Hash();
+void Hash();
 
 int Transaction(int S_uid, int R_uid, double amount);     //return -1 if transaction declined
 Block createBlock(Block prev, Transact T, int block_num); //we will pass the header to the block, and that of the transaction list
