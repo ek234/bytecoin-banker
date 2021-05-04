@@ -19,7 +19,7 @@ struct Array *PtrBlock = (struct Array *)malloc(BLOCK_SIZE * sizeof(BlockArray))
 
 void initBlockArray() //array of pointers to access the blocks in O(1)time. Need to initialise in main()
 {
-    for (int i = 0; i < 51; i++)
+    for (int i = 0; i <= 50; i++)
     {
         PtrBlock[i].Nonce = -1;
         PtrBlock[i].B = NULL
@@ -59,7 +59,7 @@ Block emptyBlock(Transact T) //inistialise in main(). For the first block in the
     return B;
 }
 
-Block initBlock(Block prev, int block_num) //will be called by initBlock during the update process of the blockchain.
+Block initBlock(int block_num) //will be called by initBlock during the update process of the blockchain.
 {
     Block B = (Block)malloc(sizeof(BlockChain));
     assert(B != NULL);
@@ -72,7 +72,7 @@ Block initBlock(Block prev, int block_num) //will be called by initBlock during 
     B->T = NULL;
     B->Nonce = x;
     B->next = NULL;
-    B->prev = prev;
+    B->prev = tail;
 
     tail->next = B;
     tail = B;
@@ -82,9 +82,9 @@ Block initBlock(Block prev, int block_num) //will be called by initBlock during 
     return B;
 }
 
-Block createBlock(Block prev, Transact T, int block_num) //we will pass the header to the block, and that of the transaction list. Call in main().
+Block createBlock(Transact T, int block_num) //we will pass the header to the block, and that of the transaction list. Call in main().
 {
-    Block current = initBlock(prev, block_num);
+    Block current = initBlock(block_num);
 
     current->T = T;
 
