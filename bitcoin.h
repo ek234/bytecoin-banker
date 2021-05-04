@@ -64,7 +64,10 @@ Transact initTransaction();
 Users initUsers();
 
 
-ElemType Hash();
+
+
+
+void Hash(Block B);
 
 int AddUser();                                            //return 1 if addition is successful
 int Transaction(int S_uid, int R_uid, double amount);     //return -1 if transaction declined
