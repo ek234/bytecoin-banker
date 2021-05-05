@@ -37,7 +37,7 @@ void updateBlockArray(Block *Bl) //updating the block array whenever a new block
 
 Block emptyBlock(Transact T) //inistialise in main(). For the first block in the chain.
 {
-    Block B = (Block)malloc(sizeof(BlockChain);
+    Block B = (Block)malloc(sizeof(BlockChain));
     assert(B != NULL);
 
     int x = rand() % (NONCE_SIZE);
@@ -119,7 +119,7 @@ bool Validate() //pass the tail pointer
         {
 			flag_invalid_chain = 1;
 			//adjusting value of nonce of prev block
-			for(it->prev->nonce = 1; it->prev->nonce < NONCE_MAX; it->prev->nonce += 1 )
+			for(it->prev->Nonce = 1; it->prev->Nonce < NONCE_SIZE; it->prev->Nonce += 1 )
 			{
 				if(it->prev_block_hash == hash(it->prev))
 					goto nonce_fixed;
