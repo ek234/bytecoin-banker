@@ -53,7 +53,10 @@ struct BlockChain
     Block prev;
 };
 
-
+struct Hashkey{
+    int hashval;
+    int hashval_2;
+};
 
 void initBlockArray();
 void updateBlockArray(Block *Bl);
@@ -64,10 +67,7 @@ Transact initTransaction();
 Users initUsers();
 
 
-
-
-
-void Hash(Block B);
+ElemType Hash(Block B,Transact T);
 
 int AddUser();                                            //return 1 if addition is successful
 int Transaction(int S_uid, int R_uid, double amount);     //return -1 if transaction declined
