@@ -21,7 +21,7 @@ void initBlockArray() //array of pointers to access the blocks in O(1)time. Need
     for (int i = 0; i <= 50; i++)
     {
         PtrBlock[i].Nonce = -1;
-        PtrBlock[i].B = NULL;
+        PtrBlock[i].B = NULL
     }
 }
 
@@ -31,7 +31,7 @@ void updateBlockArray(Block *Bl) //updating the block array whenever a new block
 
     int num = B->block_num;
 
-    PtrBlock[num].Nonce = B->Nonce;
+    PtrBlock[num].Nonce = B -> Nonce;
     PtrBlock[num].B = B;
 }
 
@@ -42,13 +42,13 @@ Block emptyBlock(Transact T) //inistialise in main(). For the first block in the
 
     int x = rand() % (NONCE_SIZE);
 
-    B->block_num = 1;
-    B->hash_val = Hash();
-    B->prev_block_hash = 0;
-    B->T = T;
-    B->Nonce = x;
-    B->next = NULL;
-    B->prev = NULL;
+    B -> block_num = 1;
+    B -> hash_val = Hash();
+    B -> prev_block_hash = 0;
+    B -> T = T;
+    B -> Nonce = x;
+    B -> next = NULL;
+    B -> prev = NULL;
 
     head = B;
     tail = head;
@@ -65,15 +65,15 @@ Block initBlock(int block_num, Transact T) //will be called by initBlock during 
 
     int x = rand() % NONCE_SIZE;
 
-    B->block_num = block_num;
-    B->hash_val = Hash(B,T);
-    B->prev_block_hash = tail->hash_val;
-    B->T = NULL;
-    B->Nonce = x;
-    B->next = NULL;
-    B->prev = tail;
+    B -> block_num = block_num;
+    B -> hash_val = Hash(B, T);
+    B -> prev_block_hash = tail -> hash_val;
+    B -> T = NULL;
+    B -> Nonce = x;
+    B -> next = NULL;
+    B -> prev = tail;
 
-    tail->next = B;
+    tail -> next = B;
     tail = B;
 
     updateBlockArray(&B);
@@ -85,7 +85,7 @@ Block createBlock(Transact T, int block_num) //we will pass the header to the bl
 {  
     Block current = initBlock(block_num, T);
 
-    current->T = T;
+    current -> T = T;
 
     return current;
 }
@@ -99,8 +99,8 @@ int Attack()
 		int r = rand() % (NONCE_SIZE - 1);
 		r++;	//Now, r is a random int from 1 to NONCE_SIZE-1 inclusive
 		//	This ensures that Nonce can not remain the same
-		PtrBlock[x].Nonce = ( PtrBlock[x].Nonce + r ) % NONCE_SIZE;
-		PtrBlock[x].B->Nonce = PtrBlock[x].Nonce;
+		PtrBlock[x].Nonce = (PtrBlock[x].Nonce + r) % NONCE_SIZE;
+		PtrBlock[x].B -> Nonce = PtrBlock[x].Nonce;
 		return x;					//num of block attacked
 	}
 
@@ -119,7 +119,7 @@ bool Validate() //pass the tail pointer
         {
 			flag_invalid_chain = 1;
 			//adjusting value of nonce of prev block
-			for(it->prev->Nonce = 1; it->prev->Nonce < NONCE_SIZE; it->prev->Nonce += 1 )
+			for(it->prev->Nonce = 1; it->prev->Nonce < NONCE_MAX; it->prev->Nonce += 1 )
 			{
 				if(it->prev_block_hash == hash(it->prev))
 					goto nonce_fixed;
@@ -127,7 +127,7 @@ bool Validate() //pass the tail pointer
         }
 
 		nonce_fixed:;
-		it = it->prev;
+		it = it -> prev;
     }
 
     return flag_invalid_chain;		//returns 0 to show no errors in the block chain
