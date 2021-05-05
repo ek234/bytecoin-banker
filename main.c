@@ -161,7 +161,7 @@ int main()
 					printf("Enter amount to transfer: ");
 					scanf("%lf", &amount);
 					
-					Transact current_transaction = transfer(s_uid, r_uid, amount);
+					Transact current_transaction = transfer(find_user(userlist, s_uid), find_user(userlist, r_uid), amount);
 
 					if( current_transaction == 0 )
 						printf("Transaction failed.\n");
@@ -170,7 +170,7 @@ int main()
 						if( tail == NULL )
 //						if( head == NULL )
 						{
-							emptyblock(current_transaction);
+							emptyBlock(current_transaction);
 							Ntransactions = 1;
 						}
 						else if(Ntransactions >= 50)
