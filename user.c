@@ -5,7 +5,7 @@
 #include <time.h>
 #include <string.h>
 
-int func = 100000;
+unsigned int func = 100000;
 #define digits 1000000;
 int __find_id()
 {
@@ -58,11 +58,12 @@ void double_user(Users *user_list)
 {
     Users new_list = (Users)malloc(2 * func * sizeof(UserList));
     func *= 2;
-    for (int i = 0; i < func / 2; ++i)
+    for (unsigned int i = 0; i < func / 2; ++i)
     {
         if (user_list[i] != NULL)
             __adduser(&new_list, user_list[i]);
     }
+    free(user_list);
     user_list = &new_list;
 }
 Users find_user(Users *user_list, int id)
