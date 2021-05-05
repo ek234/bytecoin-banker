@@ -31,7 +31,7 @@ int main()
 	srand((unsigned) time(NULL));		//seeding randomizer for other functions
 
 //	inits
-	Users* userlist = (User*) malloc( func*sizeof(User) );	// array of ptrs of userslist struct
+	Users* userlist = (User*) malloc( func*sizeof(Users) );	// array of ptrs of userslist struct
 	for( int i=0; i<func; i++ )
 	{
 		userlist[i] = NULL;
@@ -84,7 +84,7 @@ int main()
 					printf("Enter the user id: ");
 					int uid;
 					scanf("%d", &uid);
-					User temp = find_user(userlist, uid);
+					Users temp = find_user(userlist, uid);
 					double bal = temp->balance;
 					if( temp==NULL )
 					{
@@ -135,14 +135,14 @@ int main()
 					printf("Enter the initial amount to diposit: $\n");
 					double x;
 					scanf("%lf", &x);
-					Users temp = register_usr(&userlist, x);
+					Users temp = register_usr(&userlist, x, bit_value);
 //					if( temp!=userlist )
 //					{
 //						free(userlist);
 //						userlist = temp;
 //					}
 					printf("User added successfully\n");
-					printf("User id: %d\n", temp.UID);
+					printf("User id: %d\n", temp->UID);
 					net_data.new_usr++;
 					break;
 				}
@@ -167,7 +167,8 @@ int main()
 						printf("Transaction failed.\n");
 					else
 					{
-						if( blockchain == NULL )
+						if( tail == NULL )
+//						if( head == NULL )
 						{
 							emptyblock(current_transaction);
 							Ntransactions = 1;
