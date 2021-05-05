@@ -32,7 +32,7 @@ int main()
 
 //	inits
 	Users* userlist = (Users*) malloc( func*sizeof(Users) );	// array of ptrs of userslist struct
-	for( int i=0; i<func; i++ )
+	for( int i=0; i<(unsigned)func; i++ )
 	{
 		userlist[i] = NULL;
 	}
@@ -135,7 +135,7 @@ int main()
 					printf("Enter the initial amount to diposit: $\n");
 					double x;
 					scanf("%lf", &x);
-					Users temp = register_usr(&userlist, x, bit_value);
+					Users temp = register_usr(userlist, x, bit_value);
 //					if( temp!=userlist )
 //					{
 //						free(userlist);
@@ -161,7 +161,9 @@ int main()
 					printf("Enter amount to transfer: ");
 					scanf("%lf", &amount);
 					
-					Transact current_transaction = transfer(find_user(userlist, s_uid), find_user(userlist, r_uid), amount);
+					Users a = find_user(userlist, s_uid);
+					Users b = find_user(userlist, r_uid);
+					Transact current_transaction = transfer( &a, &b, amount);
 
 					if( current_transaction == 0 )
 						printf("Transaction failed.\n");
