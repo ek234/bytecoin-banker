@@ -62,11 +62,11 @@ void initBlockArray();
 void updateBlockArray(Block *Bl);
 
 Block emptyBlock(Transact T);
-Block initBlock(ElemType prev_block_hash, int block_num, Transact T);
+Block initBlock(int block_num, Transact T);
 
 ElemType Hash(Block B,Transact T);
 
-Block createBlock(Block prev, Transact T, int block_num); //we will pass the header to the block, and that of the transaction list
+Block createBlock(int block_num, Transact T); //we will pass the header to the block, and that of the transaction list
 int Attack();
 bool Validate();
 
