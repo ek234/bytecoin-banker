@@ -58,7 +58,7 @@ Block emptyBlock(Transact T) //inistialise in main(). For the first block in the
     return B;
 }
 
-Block initBlock(int block_num) //will be called by initBlock during the update process of the blockchain.
+Block initBlock(int block_num, Transact T) //will be called by initBlock during the update process of the blockchain.
 {
     Block B = (Block)malloc(sizeof(BlockChain));
     assert(B != NULL);
@@ -66,8 +66,8 @@ Block initBlock(int block_num) //will be called by initBlock during the update p
     int x = rand() % NONCE_SIZE;
 
     B->block_num = block_num;
-    B->hash_val = Hash();
-    B->prev_block_hash = prev->hash_val;
+    B->hash_val = Hash(B,T);
+    B->prev_block_hash = tail->hash_val;
     B->T = NULL;
     B->Nonce = x;
     B->next = NULL;
@@ -82,8 +82,8 @@ Block initBlock(int block_num) //will be called by initBlock during the update p
 }
 
 Block createBlock(Transact T, int block_num) //we will pass the header to the block, and that of the transaction list. Call in main().
-{
-    Block current = initBlock(block_num);
+{  
+    Block current = initBlock(block_num, T);
 
     current->T = T;
 
