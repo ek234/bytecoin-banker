@@ -5,6 +5,8 @@
 #include <assert.h>
 #include "./bitcoin.h"
 #include "./user.h"
+#include "./trans.h"
+#include "./update_val.h"
 
 #define APP_NAME "temp name"
 #define command_length 50
