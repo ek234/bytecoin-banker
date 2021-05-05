@@ -67,7 +67,7 @@ Block initBlock(int block_num, Transact T);
 
 ElemType Hash(Block B,Transact T);
 
-Block createBlock(int block_num, Transact T); //we will pass the header to the block, and that of the transaction list
+Block createBlock(Transact T, int block_num); //we will pass the header to the block, and that of the transaction list
 int Attack();
 bool Validate();
 
