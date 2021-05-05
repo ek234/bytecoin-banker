@@ -67,7 +67,7 @@ Block initBlock(ElemType prev_block_hash, int block_num, Transact T);
 ElemType Hash(Block B,Transact T);
 
 Block createBlock(Block prev, Transact T, int block_num); //we will pass the header to the block, and that of the transaction list
-int Attack(struct BlockChain **Bl, Transact T);
-int Validate(Block B);
+int Attack();
+bool Validate();
 
 #endif

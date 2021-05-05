@@ -10,7 +10,6 @@
 //withdrawal
 
 time_t time;
-srand((unsigned)time(&time));
 
 #define NONCE_SIZE 500
 #define BLOCK_SIZE 50
