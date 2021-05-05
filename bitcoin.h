@@ -2,6 +2,7 @@
 #define __BITCOIN_H
 
 #include <stdio.h>
+#include <stdbool.h>
 #include <time.h>
 typedef struct tm _time;
 
