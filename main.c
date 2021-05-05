@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 #include "./bitcoin.h"
 #include "./user.h"
@@ -32,6 +33,7 @@ int main()
 	int block_num = 0;
 	initBlockArray();
 	int Ntransactions = 0;
+	
 	double bit_value = 100;
 	data net_data;
     net_data.old_usr = 0;
@@ -159,7 +161,7 @@ int main()
 						printf("Transaction failed.\n");
 					else
 					{
-						if( blkchain == NULL )
+						if( blockchain == NULL )
 						{
 							emptyblock(current_transaction);
 							Ntransactions = 1;
@@ -171,7 +173,7 @@ int main()
 						}
 						else
 						{
-							current_transaction->next = tail->T;
+							current_transaction -> next = tail->T;
 							tail->T = current_transaction;
 							Ntransactions++;
 						}

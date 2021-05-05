@@ -12,15 +12,14 @@ double __abs(double x)
         return x;
 }
 
-double upd_val(data_ptr *detail, double val)
+double upd_val(data_ptr detail, double val)
 {
-    data_ptr det = *detail;
-    int usr_diff = det->new_usr - det->old_usr;
-    int trans_diff = det->new_trans - det->old_trans;
+    int usr_diff = detail->new_usr - detail->old_usr;
+    int trans_diff = detail->new_trans - detail->old_trans;
     double usr_change, trans_change;
 
-    double per_tc = ((double)trans_diff * 100.00) / (double)det->old_trans;
-    double per_uc = ((double)usr_diff * 100.00) / (double)det->old_usr;
+    double per_tc = ((double)trans_diff * 100.00) / (double)detail->old_trans;
+    double per_uc = ((double)usr_diff * 100.00) / (double)detail->old_usr;
 
     /*///////////////////////////////////////////////////////////////////////////////////////
     *                                                                                       * 
@@ -50,9 +49,8 @@ double upd_val(data_ptr *detail, double val)
     }
 
     //updates number of user adn transactions
-    det->new_usr = det->old_usr;
-    det->new_trans = det->old_trans;
-    detail = &det;
+    detail->new_usr = detail->old_usr;
+    detail->new_trans = detail->old_trans;
     return val + trans_change + usr_change;
 }
 
