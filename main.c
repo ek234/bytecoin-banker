@@ -71,14 +71,14 @@ int main()
 			case 'b':
 				if( strcmp( command, "balance" ) )
 				{
-					printf("Enter the user id: ");
+					printf("Enter the user ID: ");
 					int uid;
 					scanf("%d", &uid);
 					User temp = find_user(userlist, uid);
 					double bal = temp->balance;
 					if( temp==NULL )
 					{
-						printf("Error: user id doesn't exist\n");
+						printf("Error: user ID doesn't exist\n");
 					}
 					else
 					{
@@ -102,14 +102,14 @@ int main()
 			case 'u':
 				if( strcmp( command, "unregister" ) )
 				{
-					printf("Enter the user id: ");
+					printf("Enter the user ID: ");
 					int uid;
 					scanf("%d", &uid);
 					bit_value = upd_val( ..., bit_value );
 					double bal = delete_user(userlist, uid, bit_value);
 					if( bal==-1 )
 					{
-						printf("Error: user id doesn't exist\n");
+						printf("Error: user ID doesn't exist\n");
 					}
 					else
 					{
@@ -124,7 +124,7 @@ int main()
 			case 'r':
 				if( strcmp( command, "register" ) )
 				{
-					printf("Enter the initial amount to diposit: $\n");
+					printf("Enter the initial amount to deposit: $\n");
 					double x;
 					scanf("%lf", &x);
 					Users* temp = register_usr(userlist, x);
@@ -144,9 +144,9 @@ int main()
 					int s_uid, r_uid;
 					double amount;
 					printf("Starting transaction\n");
-					printf("Enter sender's id: ");
+					printf("Enter sender's ID: ");
 					scanf("%d", &s_uid);
-					printf("Enter reciever's id: ");
+					printf("Enter reciever's ID: ");
 					scanf("%d", &r_uid);
 					printf("Enter amount to transfer: ");
 					scanf("%d", &amount);
@@ -157,7 +157,7 @@ int main()
 						printf("Transaction failed.\n");
 					else
 					{
-						if( blockchain == NULL )
+						if(blockchain == NULL)
 						{
 							emptyblock(current_transaction);
 							Ntransactions = 1;
