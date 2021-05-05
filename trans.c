@@ -17,7 +17,7 @@ Users __add_trans_in_usr(Users user, Transact transfer)
     temp->next = transfer;
     return user;
 }
-Transact tarnsfer(Users *sender, Users *reciver, double amt)
+Transact transfer(Users *sender, Users *reciver, double amt)
 {
     //condition if sufficient bal is avaliable
     Users temp_s = *sender, temp_r = *reciver;

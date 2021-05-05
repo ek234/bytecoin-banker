@@ -3,6 +3,6 @@
 #include "./bitcoin.h"
 #include "./user.h"
 
-Transact tarnsfer(Users *sender, Users *reciver, double amt);
+Transact transfer(Users *sender, Users *reciver, double amt);
 
 #endif
