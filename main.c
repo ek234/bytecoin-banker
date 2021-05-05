@@ -32,6 +32,7 @@ int main()
 	int block_num = 0;
 	initBlockArray();
 	int Ntransactions = 0;
+	
 	double bit_value = 100;
 //
 
@@ -64,7 +65,7 @@ int main()
 					break;
 				}
 //				goto invalid_command;
-				goto default;
+//				goto default;
 
 			case 'b':
 				if( strcmp( command, "balance" ) )
@@ -95,7 +96,7 @@ int main()
 					break;
 				}
 //				goto invalid_command;
-				goto default;
+//				goto default;
 
 			case 'u':
 				if( strcmp( command, "unregister" ) )
@@ -117,7 +118,7 @@ int main()
 					break;
 				}
 //				goto invalid_command;
-				goto default;
+//				goto default;
 
 			case 'r':
 				if( strcmp( command, "register" ) )
@@ -134,7 +135,7 @@ int main()
 					break;
 				}
 //				goto invalid_command;
-				goto default;
+//				goto default;
 
 			case 't':
 				if( strcmp( command, "transfer" ) )
@@ -155,7 +156,7 @@ int main()
 						printf("Transaction failed.\n");
 					else
 					{
-						if( blkchain == NULL )
+						if( blockchain == NULL )
 						{
 							emptyblock(current_transaction);
 							Ntransactions = 1;
@@ -167,7 +168,7 @@ int main()
 						}
 						else
 						{
-							current_transaction->next = tail->T;
+							current_transaction -> next = tail->T;
 							tail->T = current_transaction;
 							Ntransactions++;
 						}
@@ -179,7 +180,7 @@ int main()
 					break;
 				}
 //				goto invalid_command;
-				goto default;
+//				goto default;
 
 			case 'v':
 				if( strcmp( command, "validity" ) )
@@ -203,7 +204,7 @@ int main()
 					break;
 				}
 //				goto invalid_command;
-				goto default;
+//				goto default;
 
 			case 'h':
 				if( strcmp( command, "help" ) )
@@ -212,7 +213,7 @@ int main()
 					break;
 				}
 //				goto invalid_command;
-				goto default;
+//				goto default;
 
 			case 'e':
 				if( strcmp( command, "exit" ) )
