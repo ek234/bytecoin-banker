@@ -5,7 +5,6 @@
 #include <time.h>
 #include <string.h>
 
-unsigned int func = 100000;
 #define digits 1000000;
 int __find_id()
 {
