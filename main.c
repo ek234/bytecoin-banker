@@ -31,7 +31,7 @@ int main()
 	srand((unsigned) time(NULL));		//seeding randomizer for other functions
 
 //	inits
-	Users* userlist = (User*) malloc( func*sizeof(Users) );	// array of ptrs of userslist struct
+	Users* userlist = (Users*) malloc( func*sizeof(Users) );	// array of ptrs of userslist struct
 	for( int i=0; i<func; i++ )
 	{
 		userlist[i] = NULL;
@@ -159,7 +159,7 @@ int main()
 					printf("Enter reciever's id: ");
 					scanf("%d", &r_uid);
 					printf("Enter amount to transfer: ");
-					scanf("%d", &amount);
+					scanf("%lf", &amount);
 					
 					Transact current_transaction = transfer(s_uid, r_uid, amount);
 
