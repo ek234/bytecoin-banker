@@ -62,7 +62,7 @@ void initBlockArray();
 void updateBlockArray(Block *Bl);
 
 Block emptyBlock(Transact T);
-Block initBlock(ElemType prev_block_hash, int block_num);
+Block initBlock(ElemType prev_block_hash, int block_num, Transact T);
 Transact initTransaction();
 Users initUsers();
 
@@ -72,7 +72,7 @@ ElemType Hash(Block B,Transact T);
 int AddUser();                                            //return 1 if addition is successful
 int Transaction(int S_uid, int R_uid, double amount);     //return -1 if transaction declined
 Block createBlock(Block prev, Transact T, int block_num); //we will pass the header to the block, and that of the transaction list
-int Attack(Block *Bl);
+int Attack(struct BlockChain **Bl, Transact T);
 int Validate(Block B);
 
 #endif
