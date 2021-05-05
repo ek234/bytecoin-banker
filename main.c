@@ -29,7 +29,11 @@ int main()
 	srand((unsigned) time(NULL));		//seeding randomizer for other functions
 
 //	inits
-	UsersList* userlist = NULL;	//ptr to array of users
+	Users* userlist = (User*) malloc( func*sizeof(User) );	// array of ptrs of userslist struct
+	for( int i=0; i<func; i++ )
+	{
+		userlist[i] = NULL;
+	}
 	int block_num = 0;
 	initBlockArray();
 	int Ntransactions = 0;
