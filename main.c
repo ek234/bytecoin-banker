@@ -9,7 +9,7 @@
 #define command_length 50
 #define INIT_MAX_USERS 50
 
-
+received
 void printhelp(){
 	printf("\n\t\t\t\tNAMASKAAR🙏\n\t\t\tWe are here to help you!\n\n\n");
 	printf("Instructions: -\nUse the following commands to move ahead.\n");
@@ -29,12 +29,17 @@ int main()
 	srand((unsigned) time(NULL));		//seeding randomizer for other functions
 
 //	inits
-	Users* userlist = (Users*) malloc( INIT_MAX_USERS * sizeof(Users) );	//array of users
+	UsersList* userlist = NULL;	//ptr to array of users
 	int block_num = 0;
 	initBlockArray();
 	int Ntransactions = 0;
 	
 	double bit_value = 100;
+	data net_data;
+    net_data.old_usr = 0;
+    net_data.new_usr = 0;
+    net_data.old_trans = 0;
+    net_data.new_trans = 0;
 //
 
 	printf("Welcome to %s\n\n", APP_NAME);
@@ -65,20 +70,19 @@ int main()
 
 					break;
 				}
-//				goto invalid_command;
-//				goto default;
+				goto invalid_command;
 
 			case 'b':
 				if( strcmp( command, "balance" ) )
 				{
-					printf("Enter the user ID: ");
+					printf("Enter the user id: ");
 					int uid;
 					scanf("%d", &uid);
 					User temp = find_user(userlist, uid);
 					double bal = temp->balance;
 					if( temp==NULL )
 					{
-						printf("Error: user ID doesn't exist\n");
+						printf("Error: user id doesn't exist\n");
 					}
 					else
 					{
@@ -86,57 +90,57 @@ int main()
 					}
 					break;
 				}
-//				goto invalid_command;
-				goto default;
+				goto invalid_command;
 
 			case 'c':
 				if( strcmp( command, "check" ) )
 				{
-					bit_value = upd_val( ..., bit_value );
+					bit_value = upd_val( &net_data, bit_value );
 					printf("Current Value of bitcoin: %lf\n", bit_value);
 					break;
 				}
-//				goto invalid_command;
-//				goto default;
+				goto invalid_command;
 
 			case 'u':
 				if( strcmp( command, "unregister" ) )
 				{
-					printf("Enter the user ID: ");
+					printf("Enter the user id: ");
 					int uid;
 					scanf("%d", &uid);
-					bit_value = upd_val( ..., bit_value );
+					bit_value = upd_val( &net_data, bit_value );
 					double bal = delete_user(userlist, uid, bit_value);
 					if( bal==-1 )
 					{
-						printf("Error: user ID doesn't exist\n");
+						printf("Error: user id doesn't exist\n");
 					}
 					else
 					{
+						net_data.new_usr--;
 						printf("Account successfully unregistered.\n");
 						printf("Returning balance: %lf\n", bal);
 					}
 					break;
 				}
-//				goto invalid_command;
-//				goto default;
+				goto invalid_command;
 
 			case 'r':
 				if( strcmp( command, "register" ) )
 				{
-					printf("Enter the initial amount to deposit: $\n");
+					printf("Enter the initial amount to diposit: $\n");
 					double x;
 					scanf("%lf", &x);
-					Users* temp = register_usr(userlist, x);
-					if( temp!=userlist )
-					{
-						free(userlist);
-						userlist = temp;
-					}
+					Users temp = register_usr(&userlist, x);
+//					if( temp!=userlist )
+//					{
+//						free(userlist);
+//						userlist = temp;
+//					}
+					printf("User added successfully\n");
+					printf("User id: %d\n", temp.UID);
+					net_data.new_usr++;
 					break;
 				}
-//				goto invalid_command;
-//				goto default;
+				goto invalid_command;
 
 			case 't':
 				if( strcmp( command, "transfer" ) )
@@ -144,9 +148,9 @@ int main()
 					int s_uid, r_uid;
 					double amount;
 					printf("Starting transaction\n");
-					printf("Enter sender's ID: ");
+					printf("Enter sender's id: ");
 					scanf("%d", &s_uid);
-					printf("Enter reciever's ID: ");
+					printf("Enter reciever's id: ");
 					scanf("%d", &r_uid);
 					printf("Enter amount to transfer: ");
 					scanf("%d", &amount);
@@ -157,7 +161,7 @@ int main()
 						printf("Transaction failed.\n");
 					else
 					{
-						if(blockchain == NULL)
+						if( blockchain == NULL )
 						{
 							emptyblock(current_transaction);
 							Ntransactions = 1;
@@ -175,13 +179,13 @@ int main()
 						}
 		/*temp for testing*/ assert(Ntransactions <= 50)
 
+						net_data.new_trans++;
 						printf("Transaction was successful.\n");
 					}
 					
 					break;
 				}
-//				goto invalid_command;
-//				goto default;
+				goto invalid_command;
 
 			case 'v':
 				if( strcmp( command, "validity" ) )
@@ -204,8 +208,7 @@ int main()
 					}
 					break;
 				}
-//				goto invalid_command;
-//				goto default;
+				goto invalid_command;
 
 			case 'h':
 				if( strcmp( command, "help" ) )
@@ -213,17 +216,17 @@ int main()
 					printhelp();
 					break;
 				}
-//				goto invalid_command;
-//				goto default;
+				goto invalid_command;
 
 			case 'e':
 				if( strcmp( command, "exit" ) )
 				{
 					goto exit;
 				}
+				goto invalid_command;
 
 			default:
-//				invalid_command:
+				invalid_command:
 				print("Commnd not recognized. Refer to help page:");
 				printhelp();
 
