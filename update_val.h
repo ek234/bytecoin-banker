@@ -11,7 +11,7 @@ struct data
     int old_trans;
     int new_trans;
 };
-double upd_val(data_ptr *detail, double val);
+double upd_val(data_ptr detail, double val);
 double after_attack(double val);
 
 #endif
