@@ -21,7 +21,7 @@ void initBlockArray() //array of pointers to access the blocks in O(1)time. Need
     for (int i = 0; i <= 50; i++)
     {
         PtrBlock[i].Nonce = -1;
-        PtrBlock[i].B = NULL
+        PtrBlock[i].B = NULL;
     }
 }
 
