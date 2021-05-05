@@ -2,9 +2,7 @@
 #define __BITCOIN_H
 
 #include <stdio.h>
-#include <stdbool.h>
 #include <time.h>
-
 typedef struct tm _time;
 
 typedef int ElemType;
@@ -12,7 +10,6 @@ typedef struct Transaction Transaction;
 typedef struct Transaction *Transact;
 typedef struct UserList UserList;
 typedef UserList *Usernext;
-typedef Usernext Users;
 typedef struct BlockChain BlockChain;
 typedef BlockChain *Block;
 struct Array BlockArray;
@@ -41,6 +38,7 @@ struct Transaction
     _time time;
 };
 
+
 Block head;
 Block tail;
 
@@ -55,6 +53,11 @@ struct BlockChain
     Block prev;
 };
 
+struct Hashkey{
+    int hashval;
+    int hashval_2;
+};
+
 void initBlockArray();
 void updateBlockArray(Block *Bl);
 
@@ -63,11 +66,13 @@ Block initBlock(ElemType prev_block_hash, int block_num);
 Transact initTransaction();
 Users initUsers();
 
-ElemType Hash();
 
+ElemType Hash(Block B,Transact T);
+
+int AddUser();                                            //return 1 if addition is successful
 int Transaction(int S_uid, int R_uid, double amount);     //return -1 if transaction declined
 Block createBlock(Block prev, Transact T, int block_num); //we will pass the header to the block, and that of the transaction list
 int Attack(Block *Bl);
-bool Validate(Block B);
+int Validate(Block B);
 
 #endif
