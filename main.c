@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <assert.h>
 #include "./bitcoin.h"
 #include "./user.h"
 
@@ -9,7 +10,6 @@
 #define command_length 50
 #define INIT_MAX_USERS 50
 
-received
 void printhelp(){
 	printf("\n\t\t\t\tNAMASKAAR🙏\n\t\t\tWe are here to help you!\n\n\n");
 	printf("Instructions: -\nUse the following commands to move ahead.\n");
@@ -159,7 +159,7 @@ int main()
 					printf("Enter amount to transfer: ");
 					scanf("%d", &amount);
 					
-					Transact* current_transaction = transfer(s_uid, r_uid, amount);
+					Transact current_transaction = transfer(s_uid, r_uid, amount);
 
 					if( current_transaction == 0 )
 						printf("Transaction failed.\n");
@@ -177,13 +177,13 @@ int main()
 						}
 						else
 						{
-							current_transaction -> next = tail->T;
+							current_transaction->next = tail->T;
 							tail->T = current_transaction;
 							Ntransactions++;
 						}
-		/*temp for testing*/ assert(Ntransactions <= 50)
+		/*temp for testing*/ assert(Ntransactions <= 50);
 
-						net_data.new_trans++;
+						net_data.new_trans += 1;
 						printf("Transaction was successful.\n");
 					}
 					
@@ -194,18 +194,18 @@ int main()
 			case 'v':
 				if( strcmp( command, "validity" ) )
 				{
-					bool = v;
+					bool v;
 					v = Validate();
 					printf("--:Checking Validity:--\n");
 					if(v == 0){
 						printf("\nNO ERROR\n\t\t\tCheers!!\n");
 					}
-					else if(v = 1){
+					else if(v == 1){
 						printf("\nBlock Chain needs Fixing\n");
 						printf("Resolving errors");
 						for( int i=0; i<5; i++ )
 						{
-							delay(500);
+							//delay(500);
 							printf(".");
 						}
 						printf("\nAll the errors have been resolved.\n");
@@ -231,7 +231,7 @@ int main()
 
 			default:
 				invalid_command:
-				print("Commnd not recognized. Refer to help page:");
+				printf("Commnd not recognized. Refer to help page:");
 				printhelp();
 
 		}
