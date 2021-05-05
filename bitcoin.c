@@ -21,7 +21,7 @@ void initBlockArray() //array of pointers to access the blocks in O(1)time. Need
     for (int i = 0; i <= 50; i++)
     {
         PtrBlock[i].Nonce = -1;
-        PtrBlock[i].B = NULL
+        PtrBlock[i].B = NULL;
     }
 }
 
@@ -119,7 +119,7 @@ bool Validate() //pass the tail pointer
         {
 			flag_invalid_chain = 1;
 			//adjusting value of nonce of prev block
-			for(it->prev->Nonce = 1; it->prev->Nonce < NONCE_MAX; it->prev->Nonce += 1 )
+			for(it->prev->Nonce = 1; it->prev->Nonce < NONCE_SIZE; it->prev->Nonce += 1 )
 			{
 				if(it->prev_block_hash == hash(it->prev))
 					goto nonce_fixed;
