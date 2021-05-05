@@ -63,8 +63,7 @@ int main()
 
 					break;
 				}
-//				goto invalid_command;
-				goto default;
+				goto invalid_command;
 
 			case 'b':
 				if( strcmp( command, "balance" ) )
@@ -84,8 +83,7 @@ int main()
 					}
 					break;
 				}
-//				goto invalid_command;
-				goto default;
+				goto invalid_command;
 
 			case 'c':
 				if( strcmp( command, "check" ) )
@@ -94,8 +92,7 @@ int main()
 					printf("Current Value of bitcoin: %lf\n", bit_value);
 					break;
 				}
-//				goto invalid_command;
-				goto default;
+				goto invalid_command;
 
 			case 'u':
 				if( strcmp( command, "unregister" ) )
@@ -116,8 +113,7 @@ int main()
 					}
 					break;
 				}
-//				goto invalid_command;
-				goto default;
+				goto invalid_command;
 
 			case 'r':
 				if( strcmp( command, "register" ) )
@@ -133,8 +129,7 @@ int main()
 					}
 					break;
 				}
-//				goto invalid_command;
-				goto default;
+				goto invalid_command;
 
 			case 't':
 				if( strcmp( command, "transfer" ) )
@@ -178,8 +173,7 @@ int main()
 					
 					break;
 				}
-//				goto invalid_command;
-				goto default;
+				goto invalid_command;
 
 			case 'v':
 				if( strcmp( command, "validity" ) )
@@ -202,8 +196,7 @@ int main()
 					}
 					break;
 				}
-//				goto invalid_command;
-				goto default;
+				goto invalid_command;
 
 			case 'h':
 				if( strcmp( command, "help" ) )
@@ -211,17 +204,17 @@ int main()
 					printhelp();
 					break;
 				}
-//				goto invalid_command;
-				goto default;
+				goto invalid_command;
 
 			case 'e':
 				if( strcmp( command, "exit" ) )
 				{
 					goto exit;
 				}
+				goto invalid_command;
 
 			default:
-//				invalid_command:
+				invalid_command:
 				print("Commnd not recognized. Refer to help page:");
 				printhelp();
 
