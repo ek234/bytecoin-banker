@@ -32,7 +32,7 @@ int main()
 
 //	inits
 	Users* userlist = (Users*) malloc( func*sizeof(Users) );	// array of ptrs of userslist struct
-	for( int i=0; i<(unsigned)func; i++ )
+	for( int i=0; i<(signed)func; i++ )
 	{
 		userlist[i] = NULL;
 	}
