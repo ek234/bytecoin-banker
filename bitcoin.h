@@ -40,7 +40,6 @@ struct Transaction
 };
 
 
-Block head = NULL;
 Block tail;
 
 struct BlockChain

@@ -8,6 +8,7 @@
 #define NONCE_SIZE 500
 #define BLOCK_SIZE 50
 
+Block head = NULL;
 //the blockchain is a doubly linked list
 
 //Array containing nonce and pointer to block corresponding to the index.
@@ -48,7 +49,7 @@ Block emptyBlock(Transact T)
 
     int x = rand() % (NONCE_SIZE); //randomly calculating a nonce
 
-    B->block_num = 1;         //first block in the blockchain
+    B->block_num = 1;      //first block in the blockchain
     B->hash_val = Hash(B); //calculating hash val od the first block
     B->prev_block_hash = 0;
     B->T = T; //header of transaction linked list

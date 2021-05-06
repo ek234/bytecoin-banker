@@ -31,8 +31,8 @@ int main()
 	srand((unsigned) time(NULL));		//seeding randomizer for other functions
 
 //	inits
-	Users* userlist = (Users*) malloc( func*sizeof(Users) );	// array of ptrs of userslist struct
-	for( int i=0; i<(signed)func; i++ )
+	Users* userlist = (Users*) malloc( 100000*sizeof(Users) );	// array of ptrs of userslist struct
+	for( int i=0; i<(signed)100000; i++ )
 	{
 		userlist[i] = NULL;
 	}
@@ -49,7 +49,7 @@ int main()
 //
 
 	printf("Welcome to %s\n\n", APP_NAME);
-	printhelp();
+	//printhelp();
 
 	while(1)
 	{
@@ -60,7 +60,7 @@ int main()
 		switch( command[0] )
 		{
 			case 'a':
-				if( strcmp( command, "attack" ) )
+				if( !strcmp( command, "attack" ) )
 				{
 					printf("Let's see who's taking the Majority Control!\n");
 					printf("ATTACK!!!\n");
@@ -79,7 +79,7 @@ int main()
 				goto invalid_command;
 
 			case 'b':
-				if( strcmp( command, "balance" ) )
+				if( !strcmp( command, "balance" ) )
 				{
 					printf("Enter the user id: ");
 					int uid;
@@ -99,7 +99,7 @@ int main()
 				goto invalid_command;
 
 			case 'c':
-				if( strcmp( command, "check" ) )
+				if( !strcmp( command, "check" ) )
 				{
 					bit_value = upd_val( &net_data, bit_value );
 					printf("Current Value of bitcoin: %lf\n", bit_value);
@@ -108,7 +108,7 @@ int main()
 				goto invalid_command;
 
 			case 'u':
-				if( strcmp( command, "unregister" ) )
+				if( !strcmp( command, "unregister" ) )
 				{
 					printf("Enter the user id: ");
 					int uid;
@@ -130,7 +130,7 @@ int main()
 				goto invalid_command;
 
 			case 'r':
-				if( strcmp( command, "register" ) )
+				if( !strcmp( command, "register" ) )
 				{
 					printf("Enter the initial amount to diposit: $\n");
 					double x;
@@ -149,7 +149,7 @@ int main()
 				goto invalid_command;
 
 			case 't':
-				if( strcmp( command, "transfer" ) )
+				if( !strcmp( command, "transfer" ) )
 				{
 					int s_uid, r_uid;
 					double amount;
@@ -197,7 +197,7 @@ int main()
 				goto invalid_command;
 
 			case 'v':
-				if( strcmp( command, "validity" ) )
+				if( !strcmp( command, "validity" ) )
 				{
 					bool v;
 					v = Validate();
@@ -220,7 +220,7 @@ int main()
 				goto invalid_command;
 
 			case 'h':
-				if( strcmp( command, "help" ) )
+				if( !strcmp( command, "help" ) )
 				{
 					printhelp();
 					break;
@@ -228,7 +228,7 @@ int main()
 				goto invalid_command;
 
 			case 'e':
-				if( strcmp( command, "exit" ) )
+				if( !strcmp( command, "exit" ) )
 				{
 					goto exit;
 				}
