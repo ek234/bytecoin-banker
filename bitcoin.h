@@ -40,7 +40,7 @@ struct Transaction
 };
 
 
-Block tail;
+Block tail = NULL;
 
 struct BlockChain
 {
