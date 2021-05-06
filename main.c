@@ -42,6 +42,8 @@ int main()
 	int block_num = 0;
 	initBlockArray();
 	int Ntransactions = 0;
+
+	head = tail = NULL;
 	
 	double bit_value = 100;
 	data net_data;

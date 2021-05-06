@@ -39,8 +39,9 @@ struct Transaction
     _time time;
 };
 
-
-Block tail = NULL;
+Block tail;
+Block head;
+//the blockchain is a doubly linked list
 
 struct BlockChain
 {

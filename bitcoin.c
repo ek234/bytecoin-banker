@@ -8,8 +8,6 @@
 #define NONCE_SIZE 500
 #define BLOCK_SIZE 50
 
-Block head = NULL;
-//the blockchain is a doubly linked list
 
 //Array containing nonce and pointer to block corresponding to the index.
 //Blocks accesible in O(1) time
