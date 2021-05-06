@@ -23,6 +23,7 @@ void printhelp(){
 	printf("6. Press 'exit' to exit from the page.\n");
 	printf("7. Press 'balance' to check the balance no. of bitcoins.\n");
 	printf("8. Press 'unregister' to remove your details from the list.\n");
+	printf("You can also enter only the first alphabet.\n");
 	printf("\n\t\t\tHave a smooth Experience here. Stay Safe🌻\n\n\n");
 }
 	   
