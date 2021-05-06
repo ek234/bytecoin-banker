@@ -15,13 +15,15 @@
 void printhelp(){
 	printf("\n\t\t\t\tNAMASKAAR🙏\n\t\t\tWe are here to help you!\n\n\n");
 	printf("Instructions: -\nUse the following commands to move ahead.\n");
-	printf("1. Press 'register user' to register your details.\n");
+	printf("1. Press 'register' to register your details.\n");
 	printf("2. Press 'attack' to see your situation with the equity (Attack).\n");
 	printf("3. Press 'transfer' to fill your transaction details.\n");
 	printf("4. Press 'validity' to check the validity of your Block Chain.\n");
 	printf("5. Press 'help' to return to the set of instructions.\n");
 	printf("6. Press 'exit' to exit from the page.\n");
-	printf("\n\t\t\t\tHave a smooth Experience here. Stay Safe🌻\n\n\n");
+	printf("7. Press 'balance' to check the balance no. of bitcoins.\n");
+	printf("8. Press 'unregister' to remove your details from the list.\n");
+	printf("\n\t\t\tHave a smooth Experience here. Stay Safe🌻\n\n\n");
 }
 	   
 	       
