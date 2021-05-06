@@ -48,12 +48,12 @@ Block emptyBlock(Transact T)
     int x = rand() % (NONCE_SIZE); //randomly calculating a nonce
 
     B->block_num = 1;      //first block in the blockchain
-    B->hash_val = Hash(B); //calculating hash val od the first block
     B->prev_block_hash = 0;
     B->T = T; //header of transaction linked list
     B->Nonce = x;
     B->next = NULL;
     B->prev = NULL;
+//    B->hash_val = Hash(B); //calculating hash val od the first block
 
     head->next = B; //updating gloabal variable head
     tail = head;    //updating global variable tail
@@ -75,12 +75,12 @@ Block initBlock(int block_num, Transact T) //will be called by initBlock during 
 
     //writing all necessary details in the block
     B->block_num = block_num;
-    B->hash_val = Hash(B); //calculating hash value using hash function
     B->prev_block_hash = tail->hash_val;
-    B->T = NULL;
+    B->T = T;
     B->Nonce = x;
     B->next = NULL;
     B->prev = tail;
+//    B->hash_val = Hash(B); //calculating hash value using hash function
 
     tail->next = B; //insert at rear of the blockchain
     tail = B;
@@ -98,7 +98,7 @@ Block createBlock(Transact T, int block_num)
 {
     Block current = initBlock(block_num, T); //calling initBlock()
 
-    current->T = T; //adding header of transaction linked list to the block
+ //   current->T = T; //adding header of transaction linked list to the block
 
     return current; //returning the current block of the blockchain
 }
