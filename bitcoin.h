@@ -40,7 +40,7 @@ struct Transaction
 };
 
 
-Block head;
+Block head = NULL;
 Block tail;
 
 struct BlockChain
@@ -65,7 +65,7 @@ void updateBlockArray(Block *Bl);
 Block emptyBlock(Transact T);
 Block initBlock(int block_num, Transact T);
 
-ElemType Hash(Block B,Transact T);
+ElemType Hash(Block B);
 
 Block createBlock(Transact T, int block_num); //we will pass the header to the block, and that of the transaction list
 int Attack();
