@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-
+unsigned int usr_no = 100000;
 #define digits 1000000;
 int __find_id()
 {
@@ -14,7 +14,7 @@ int __find_id()
 int __check(Users *user_list, int id)
 {
 
-    Users temp = user_list[id % func];
+    Users temp = user_list[id % usr_no];
     if (temp == NULL)
         return 1;
     else
@@ -22,7 +22,7 @@ int __check(Users *user_list, int id)
 }
 Users __adduser(Users *user_list, Usernext user)
 {
-    int hash_key = user->UID % func;
+    int hash_key = user->UID % usr_no;
     user_list[hash_key] = user;
     return user_list[hash_key];
 }
@@ -49,15 +49,16 @@ Users register_usr(Users *user_list, double init_val, double value)
     temp_user->join_time = *localtime(&t);
 
     ///// returns pointer to newly registered users details
-    return __adduser(user_list, temp_user);
+    Users return_val = __adduser(user_list, temp_user);
+    return return_val;
 }
 
 //takes pointer to new list and double the maximum no of users
 void double_user(Users *user_list)
 {
-    Users new_list = (Users)malloc(2 * func * sizeof(UserList));
-    func *= 2;
-    for (unsigned int i = 0; i < func / 2; ++i)
+    Users new_list = (Users)malloc(2 * usr_no * sizeof(UserList));
+    usr_no *= 2;
+    for (unsigned int i = 0; i < usr_no / 2; ++i)
     {
         if (user_list[i] != NULL)
             __adduser(&new_list, user_list[i]);
@@ -69,13 +70,13 @@ Users find_user(Users *user_list, int id)
 {
     if (__check(user_list, id) == 1)
         return NULL; ////return NULL if id is wrong
-    int hash_key = id % func;
+    int hash_key = id % usr_no;
     return user_list[hash_key];
 }
 
 double delete_user(Users *user_list, int id, double value)
 {
-    int hash_key = id % func;
+    int hash_key = id % usr_no;
     Users temp = user_list[hash_key];
     double bal = temp->balance * value;
     free(temp);
