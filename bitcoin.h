@@ -18,7 +18,7 @@ struct Array BlockArray;
 struct Array
 {
     int Nonce;
-    Block *B;
+    Block B;
 };
 
 struct UserList
