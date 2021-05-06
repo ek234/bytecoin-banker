@@ -8,6 +8,8 @@ Users __add_trans_in_usr(Users user, Transact transfer)
     {
         temp = (Transact)malloc(sizeof(Transaction));
         temp->next = NULL;
+        temp->R_UID = 0;
+        temp->S_UID = 0;
         temp->tr_amount = 0;
     }
 
