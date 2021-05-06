@@ -16,10 +16,10 @@ double upd_val(data_ptr detail, double val)
 {
     int usr_diff = detail->new_usr - detail->old_usr;
     int trans_diff = detail->new_trans - detail->old_trans;
-    double usr_change, trans_change;
+    double usr_change = 0, trans_change = 0;
 
-    double per_tc = ((double)trans_diff * 100.00) / (double)detail->old_trans;
-    double per_uc = ((double)usr_diff * 100.00) / (double)detail->old_usr;
+    double per_tc = ((double)trans_diff * 100.00) / (double)(detail->old_trans + 1.00);
+    double per_uc = ((double)usr_diff * 100.00) / (double)(detail->old_usr + 1.00);
 
     /*///////////////////////////////////////////////////////////////////////////////////////
     *                                                                                       * 
