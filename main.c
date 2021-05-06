@@ -21,7 +21,7 @@ void printhelp(){
 	printf("4. Press 'validity' to check the validity of your Block Chain.\n");
 	printf("5. Press 'help' to return to the set of instructions.\n");
 	printf("6. Press 'exit' to exit from the page.\n");
-	printf("\n\t\t\t\tHave a smooth Experience here. Stay Safe🌻\n");
+	printf("\n\t\t\t\tHave a smooth Experience here. Stay Safe🌻\n\n\n");
 }
 	   
 	       
