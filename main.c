@@ -23,6 +23,7 @@ void printhelp(){
 	printf("6. Press 'exit' to exit from the page.\n");
 	printf("7. Press 'balance' to check the balance no. of bitcoins.\n");
 	printf("8. Press 'unregister' to remove your details from the list.\n");
+	printf("You can also enter only the first alphabet.\n");
 	printf("\n\t\t\tHave a smooth Experience here. Stay Safe🌻\n\n\n");
 }
 	   
@@ -55,14 +56,14 @@ int main()
 
 	while(1)
 	{
-		printf("Please enter the command:");
+		printf("Please enter the command: ");
 		char command[command_length];
 		scanf("%s", command);
 
 		switch( command[0] )
 		{
 			case 'a':
-				if( !strcmp( command, "attack" ) )
+				if( command[1]=='\0' || !strcmp( command, "attack" ) )
 				{
 					printf("Let's see who's taking the Majority Control!\n");
 					printf("ATTACK!!!\n");
@@ -81,7 +82,7 @@ int main()
 				goto invalid_command;
 
 			case 'b':
-				if( !strcmp( command, "balance" ) )
+				if( command[1]=='\0' || !strcmp( command, "balance" ) )
 				{
 					printf("Enter the user id: ");
 					int uid;
@@ -101,7 +102,7 @@ int main()
 				goto invalid_command;
 
 			case 'c':
-				if( !strcmp( command, "check" ) )
+				if( command[1]=='\0' || !strcmp( command, "check" ) )
 				{
 					bit_value = upd_val( &net_data, bit_value );
 					printf("Current Value of bitcoin: %lf\n", bit_value);
@@ -110,7 +111,7 @@ int main()
 				goto invalid_command;
 
 			case 'u':
-				if( !strcmp( command, "unregister" ) )
+				if( command[1]=='\0' || !strcmp( command, "unregister" ) )
 				{
 					printf("Enter the user id: ");
 					int uid;
@@ -132,9 +133,9 @@ int main()
 				goto invalid_command;
 
 			case 'r':
-				if( !strcmp( command, "register" ) )
+				if( command[1]=='\0' || !strcmp( command, "register" ) )
 				{
-					printf("Enter the initial amount to diposit: $\n");
+					printf("Enter the initial amount to deposit: $");
 					double x;
 					scanf("%lf", &x);
 					Users temp = register_usr(userlist, x, bit_value);
@@ -151,7 +152,7 @@ int main()
 				goto invalid_command;
 
 			case 't':
-				if( !strcmp( command, "transfer" ) )
+				if( command[1]=='\0' || !strcmp( command, "transfer" ) )
 				{
 					int s_uid, r_uid;
 					double amount;
@@ -199,7 +200,7 @@ int main()
 				goto invalid_command;
 
 			case 'v':
-				if( !strcmp( command, "validity" ) )
+				if( command[1]=='\0' || !strcmp( command, "validity" ) )
 				{
 					bool v;
 					v = Validate();
@@ -222,7 +223,7 @@ int main()
 				goto invalid_command;
 
 			case 'h':
-				if( !strcmp( command, "help" ) )
+				if( command[1]=='\0' || !strcmp( command, "help" ) )
 				{
 					printhelp();
 					break;
@@ -230,7 +231,7 @@ int main()
 				goto invalid_command;
 
 			case 'e':
-				if( !strcmp( command, "exit" ) )
+				if( command[1]=='\0' || !strcmp( command, "exit" ) )
 				{
 					goto exit;
 				}
