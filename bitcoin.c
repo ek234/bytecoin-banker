@@ -111,6 +111,8 @@ Block createBlock(Transact T, int block_num)
 //we can access the block in O(1) time because of PtrBlock()
 int Attack()
 {
+    if(head == NULL)
+        return -1;
     int x = rand() % BLOCK_SIZE; //randomly checing if a block exists in the blockchain
 
     if (PtrBlock[x].B != NULL)
@@ -131,6 +133,13 @@ int Attack()
 bool Validate()
 {
     bool flag_invalid_chain = 0;
+    
+    if (tail != NULL)
+    {
+        Block current = tail;
+    }
+    else
+        return 0;  //chain doesen't exist so it is valid
 
     Block current = tail;
     while (current->prev != NULL)
