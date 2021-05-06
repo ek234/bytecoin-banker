@@ -41,7 +41,7 @@ Users register_usr(Users *user_list, double init_val, double value)
     *    adds user details in user block    *
     *****************************************/
 
-    Users temp_user = (Users)malloc(sizeof(Users));
+    Users temp_user = (Users)malloc(sizeof(UserList));
     temp_user->balance = init_val / value;
     temp_user->UID = id;
     temp_user->T = NULL;
@@ -84,5 +84,11 @@ double delete_user(Users *user_list, int id, double value)
 }
 /* int main()
 {
-    printf("hello world\n");
+    Users *userlist = (Users *)malloc(100000 * sizeof(Users));
+    while (1)
+    {
+        double amt;
+        scanf("%lf", &amt);
+        register_usr(&userlist,)
+    }
 } */
