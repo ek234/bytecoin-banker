@@ -90,13 +90,14 @@ int main()
 					int uid;
 					scanf("%d", &uid);
 					Users temp = find_user(userlist, uid);
-					double bal = temp->balance;
+					
 					if( temp==NULL )
 					{
 						printf("Error: user id doesn't exist\n");
 					}
 					else
-					{
+					{	
+						double bal = temp->balance;
 						printf("Current balance: %lfBitcoin\n", bal);
 					}
 					break;

@@ -55,7 +55,7 @@ Block emptyBlock(Transact T)
     B->prev = NULL;
 //    B->hash_val = Hash(B); //calculating hash val od the first block
 
-    head->next = B; //updating gloabal variable head
+    head = B; //updating gloabal variable head
     tail = head;    //updating global variable tail
 
     updateBlockArray(&B); //updating PtrBlock[]
