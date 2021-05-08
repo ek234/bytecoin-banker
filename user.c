@@ -83,6 +83,7 @@ double delete_user(Users *user_list, int id, double value)
         return -1.00;
     double bal = temp->balance * value;
     coin_left += temp->balance;
+	user_list[hash_key] = NULL;
     free(temp);
     return bal;
 }
