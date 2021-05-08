@@ -98,7 +98,7 @@ int main()
 					else
 					{	
 						double bal = temp->balance;
-						printf("Current balance: %lfBitcoin\n", bal);
+						printf("Current balance: %g Bitcoin\n", bal);
 					}
 					break;
 				}

@@ -6,6 +6,7 @@
 #include <string.h>
 unsigned int usr_no = 100000;
 #define digits 1000000;
+static double coin_left = 10000000000;    //fixed no  of bitcoins 
 int __find_id()
 {
     int id_num = rand() % digits;
@@ -43,6 +44,9 @@ Users register_usr(Users *user_list, double init_val, double value)
 
     Users temp_user = (Users)malloc(sizeof(UserList));
     temp_user->balance = init_val / value;
+    if (coin_left < temp_user->balance)
+        return NULL;
+    coin_left -= temp_user->balance;
     temp_user->UID = id;
     temp_user->T = NULL;
     temp_user->next = NULL;
@@ -79,6 +83,7 @@ double delete_user(Users *user_list, int id, double value)
     int hash_key = id % usr_no;
     Users temp = user_list[hash_key];
     double bal = temp->balance * value;
+    coin_left += temp->balance;
     free(temp);
     return bal;
 }
