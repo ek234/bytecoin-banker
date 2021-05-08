@@ -24,7 +24,7 @@ double upd_val(data_ptr detail, double val)
     /*///////////////////////////////////////////////////////////////////////////////////////
     *                                                                                       * 
     *   Value of bitcoin depends on two factors here                                        *
-    *   1. If no of users increase ==> deman increase ==> increase value                    *   
+    *   1. If no of users increase ==> demand increase ==> increase value                    *   
     *   2. If more bigger transactions are there, it means people did'nt tend to keep       *   
     *      coin ==> value decreases                                                         *
     *   3. If no/less transactions ==> High demand people ==> val increase                  *
@@ -35,22 +35,31 @@ double upd_val(data_ptr detail, double val)
     if (__abs(usr_diff) >= 10 && __abs(per_uc) >= 10)
     {
         //increase or decrease is manages by the sign of change percentage
-        usr_change = (val * per_uc) / 400.00;
+        if (__abs(per_uc) > 8000.00 / val)
+            usr_change = (__abs(per_uc) / per_uc) * 20;
+        else
+            usr_change = (val * per_uc) / 400.00;
+        detail->new_usr = detail->old_usr;
     }
     if (trans_diff >= 10 && per_tc >= 15)
     {
         // decrease val
-        trans_change = (val * per_tc) / 500.00;
+        if (__abs(per_tc) > 5000.00 / val)
+            trans_change = 10;
+        else
+            trans_change = (val * per_tc) / 500.00;
+        detail->new_trans = detail->old_trans;
     }
     else if (trans_diff <= -20 && per_tc <= -20)
     {
         // increase val
-        trans_change = (val * per_tc) / 500.00;
+        if (__abs(per_tc) > 5000.00 / val)
+            trans_change = -10;
+        else
+            trans_change = (val * per_tc) / 500.00;
+        detail->new_trans = detail->old_trans;
     }
 
-    //updates number of user adn transactions
-    detail->new_usr = detail->old_usr;
-    detail->new_trans = detail->old_trans;
     return val + trans_change + usr_change;
 }
 
