@@ -1,5 +1,5 @@
 # Bitcoin
-<img src="https://economictimes.indiatimes.com/thumb/msid-79280279,width-1200,height-900,resizemode-4,imgsize-678018/bitcoin.jpg?from=mdr" alt="drawing" style="width:200px;"/>  
+<img src="https://economictimes.indiatimes.com/thumb/msid-79280279,width-1200,height-900,resizemode-4,imgsize-678018/bitcoin.jpg?from=mdr" alt="drawing" width="200px;">  
 
 ## This is a group project made during DSA course at IIIT-H.  
 - There will be a total of *10 billion* bitcoins of which can be bought by users.   
