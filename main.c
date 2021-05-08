@@ -23,7 +23,8 @@ void printhelp(){
 	printf("6. Press 'exit' to exit from the page.\n");
 	printf("7. Press 'balance' to check the balance no. of bitcoins.\n");
 	printf("8. Press 'unregister' to remove your details from the list.\n");
-	printf("You can also enter only the first alphabet.\n");
+	printf("Note: in %s v0.5+, users can select only the first alphabet of the command.\n", APP_NAME);
+	printf("\n\t\t\t%s v0.6.01\n\n\n", APP_NAME);
 	printf("\n\t\t\tHave a smooth Experience here. Stay Safe🌻\n\n\n");
 }
 	   
@@ -64,7 +65,7 @@ int main()
 //
 
 	printf("\n\t\t\t\tNAMASKAAR🙏\n\n\n");
-	printf("\n\t\tWelcome to %s\n\n", APP_NAME);
+	printf("\n\t\t\tWelcome to %s\n\n", APP_NAME);
 	printhelp();
 
 	while(1)
@@ -73,9 +74,11 @@ int main()
 		char command[command_length];
 		scanf("%s", command);
 
+		//running switch-case on the first char of the command to reduce the number of comparisons
 		switch( command[0] )
 		{
 			case 'a':
+				// if command[1] is a null char, then the command was "a". this is accepted
 				if( command[1]=='\0' || !strcmp( command, "attack" ) )
 				{
 					printf("Let's see who's taking the Majority Control!\n");
@@ -92,14 +95,15 @@ int main()
 
 					break;
 				}
+				// if command didn't enter the if block and therefore didn't break out,
+				// then command was invalid.
 				goto invalid_command;
 
 			case 'b':
 				if( command[1]=='\0' || !strcmp( command, "balance" ) )
 				{
 					printf("Enter the user id: ");
-					int uid;
-					scanf("%d", &uid);
+					int uid;	scanf("%d", &uid);
 					Users temp = find_user(userlist, uid);
 					
 					if( temp==NULL )
@@ -128,8 +132,8 @@ int main()
 				if( command[1]=='\0' || !strcmp( command, "unregister" ) )
 				{
 					printf("Enter the user id: ");
-					int uid;
-					scanf("%d", &uid);
+					int uid;	scanf("%d", &uid);
+
 					bit_value = upd_val( &net_data, bit_value );
 					double bal = delete_user(userlist, uid, bit_value);
 					if( bal==-1 )
