@@ -17,15 +17,16 @@ void printhelp()
 	// help page
 	printf("\n\t\t\tWe are here to help you!\n\n");
 	printf("Instructions: -\nUse the following commands to move ahead:\n");
-	printf("1. Press 'register' to register your details.\n");
-	printf("2. Press 'balance' to check the balance no. of bitcoins.\n");
-	printf("3. Press 'check' to check the value of bitcoin with respect to $.\n");
-	printf("4. Press 'transfer' to fill your transaction details.\n");
-	printf("5. Press 'unregister' to remove your details from the list.\n");
-	printf("6. Press 'attack' to see your situation with the equity (Attack).\n");
-	printf("7. Press 'validity' to check the validity of your Block Chain.\n");
-	printf("8. Press 'help' to return to the set of instructions.\n");
-	printf("9. Press 'exit' to exit from the page.\n");
+	printf("1.\tPress 'register' to register your details.\n");
+	printf("2.\tPress 'balance' to check the balance no. of bitcoins.\n");
+	printf("3.\tPress 'check' to check the value of bitcoin with respect to $.\n");
+	printf("4.\tPress 'mine' to mine bitcoins.\n");
+	printf("5.\tPress 'transfer' to fill your transaction details.\n");
+	printf("6.\tPress 'unregister' to remove your details from the list.\n");
+	printf("7.\tPress 'attack' to see your situation with the equity (Attack).\n");
+	printf("8.\tPress 'validity' to check the validity of your Block Chain.\n");
+	printf("9.\tPress 'help' to return to the set of instructions.\n");
+	printf("10.\tPress 'exit' to exit from the page.\n");
 	printf("Note: in %s v0.5+, users can select only the first alphabet of the command.\n", APP_NAME);
 	printf("\n%s v0.6.01\n", APP_NAME);
 	printf("\n\t\t\tHave a smooth Experience here. Stay Safe🌻\n");
@@ -219,6 +220,8 @@ int main()
 
 					printf("User added successfully\n");
 					printf("User id: %.7d\n", temp->UID);
+					printf("Intial balance: %lf\n", temp->balance);
+					printf("joining time: %lld\n", temp->join_time);
 					net_data.new_usr++;
 					break;
 				}
