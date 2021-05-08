@@ -112,7 +112,8 @@ int Attack()
     if(head == NULL)
         return -1;
     int x = rand() % BLOCK_SIZE; //randomly checing if a block exists in the blockchain
-    if (PtrBlock[x].B != NULL)
+	// if the chosen block exists and is not the current block
+    if (PtrBlock[x].B!=NULL && PtrBlock[x].B!=tail)
     {
         int r = rand() % (NONCE_SIZE - 1);
         r++; //Now, r is a random int from 1 to NONCE_SIZE-1 inclusive

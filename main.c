@@ -14,7 +14,7 @@
 void printhelp()
 {
 	// help page
-	printf("\n\t\t\tWe are here to help you!\n\n");
+	printf("\n\t\t\tWe are here to help you!\n");
 	printf("Instructions: -\nUse the following commands to move ahead:\n");
 	printf("1.\tPress 'register' to register your details.\n");
 	printf("2.\tPress 'balance' to check the balance no. of bitcoins.\n");
@@ -73,7 +73,7 @@ int main()
 
 	while(1)
 	{
-		printf("Please enter the command: ");
+		printf("\nPlease enter the command: ");
 		char command[command_length];
 		scanf("%s", command);
 
