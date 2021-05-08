@@ -13,7 +13,7 @@ $./run.sh
 - List of functions this programme can execute are: 
     1. **Register User** : Takes an initial deposit amount.  
         **Syntax** `register` alias `r`
-    2. **Transaction** : Takes Sender ID, Reciver's ID and number of bitcoins to be transfered.   
+    2. **Transaction** : Takes Sender ID, Reciver's ID and number of bitcoins to be transferred.   
         **Syntax** `transfer` alias `t`
     3.  **Balance** : Checks Your balance. Takes your ID.  
         **Syntax** `balance` alias `b`
