@@ -15,19 +15,20 @@
 void printhelp()
 {
 	// help page
-	printf("\n\t\t\tWe are here to help you!\n\n\n");
+	printf("\n\t\t\tWe are here to help you!\n\n");
 	printf("Instructions: -\nUse the following commands to move ahead:\n");
 	printf("1. Press 'register' to register your details.\n");
-	printf("2. Press 'attack' to see your situation with the equity (Attack).\n");
-	printf("3. Press 'transfer' to fill your transaction details.\n");
-	printf("4. Press 'validity' to check the validity of your Block Chain.\n");
-	printf("5. Press 'help' to return to the set of instructions.\n");
-	printf("6. Press 'exit' to exit from the page.\n");
-	printf("7. Press 'balance' to check the balance no. of bitcoins.\n");
-	printf("8. Press 'unregister' to remove your details from the list.\n");
+	printf("2. Press 'balance' to check the balance no. of bitcoins.\n");
+	printf("3. Press 'check' to check the value of bitcoin with respect to $.\n");
+	printf("4. Press 'transfer' to fill your transaction details.\n");
+	printf("5. Press 'unregister' to remove your details from the list.\n");
+	printf("6. Press 'attack' to see your situation with the equity (Attack).\n");
+	printf("7. Press 'validity' to check the validity of your Block Chain.\n");
+	printf("8. Press 'help' to return to the set of instructions.\n");
+	printf("9. Press 'exit' to exit from the page.\n");
 	printf("Note: in %s v0.5+, users can select only the first alphabet of the command.\n", APP_NAME);
-	printf("\n\t\t\t%s v0.6.01\n\n\n", APP_NAME);
-	printf("\n\t\t\tHave a smooth Experience here. Stay Safe🌻\n\n\n");
+	printf("\n%s v0.6.01\n", APP_NAME);
+	printf("\n\t\t\tHave a smooth Experience here. Stay Safe🌻\n");
 }
 	   
 	       
@@ -66,7 +67,7 @@ int main()
     net_data.new_trans = 0;
 //
 
-	printf("\n\t\t\t\tNAMASKAAR🙏\n\n\n");
+	printf("\n\t\t\t\tNAMASKAAR🙏\n\n");
 	printf("\n\t\t\tWelcome to %s\n\n", APP_NAME);
 	printhelp();
 
@@ -105,18 +106,28 @@ int main()
 				if( command[1]=='\0' || !strcmp( command, "transfer" ) )
 				{
 					int s_uid, r_uid;
+					Users a, b;
 					double amount;
 					printf("Starting transaction\n");
-					printf("Enter sender's id: ");
-					scanf("%d", &s_uid);
-					printf("Enter reciever's id: ");
-					scanf("%d", &r_uid);
+
+					// taking senders UID until it's valid
+					do{
+						printf("Enter sender's id: ");
+						scanf("%d", &s_uid);
+						// finding sender
+						a = find_user(userlist, s_uid);
+					} while( a==NULL && printf("Invalid UID\n") );
+					// taking reciever's UID until it's valid
+					do{
+						printf("Enter reciever's id: ");
+						scanf("%d", &r_uid);
+						// finding reciever
+						b = find_user(userlist, r_uid);
+					} while( b==NULL && printf("Invalid UID\n") );
+
 					printf("Enter amount to transfer: ");
 					scanf("%lf", &amount);
 					
-					// find users from userlist
-					Users a = find_user(userlist, s_uid);
-					Users b = find_user(userlist, r_uid);
 					Transact current_transaction = transfer( &a, &b, amount);
 
 					if( current_transaction == NULL )
