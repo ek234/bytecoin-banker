@@ -148,7 +148,7 @@ int main()
 //						userlist = temp;
 //					}
 					printf("User added successfully\n");
-					printf("User id: %d\n", temp->UID);
+					printf("User id: %.7d\n", temp->UID);
 					net_data.new_usr++;
 					break;
 				}
