@@ -67,7 +67,7 @@ int main()
     net_data.new_trans = 0;
 //
 
-	printf("\n\t\t\t\tNAMASKAAR🙏\n\n");
+	printf("\n\t\t\t\t🙏NAMASKAAR🙏\n\n");
 	printf("\n\t\t\tWelcome to %s\n\n", APP_NAME);
 	printhelp();
 
@@ -184,6 +184,36 @@ int main()
 				}
 				goto invalid_command;
 
+			case 'm':
+				if( command[1]=='\0' || !strcmp( command, "mine" ) )
+				{
+					printf("Enter the user id: ");
+					int uid;	scanf("%d", &uid);
+					Users temp_user = find_user(userlist, uid);
+					
+					if( temp_user==NULL )
+					{
+						printf("Error: user id doesn't exist\n");
+					}
+					else
+					{	
+						bool mined = mine( temp_user );
+
+						if( mined==1 )
+						{
+							printf("Congratulations!! You successfully mined bitcoins.\n");
+							double bal = temp_user->balance;
+							printf("Current balance in your account: %g Bitcoin\n", bal);
+						}
+						else if( mined==-1 )
+							printf("Sorry. Not enough bitcoins left.\n");
+						else
+							printf("Sorry. Mine unsuccessful.\n");
+					}
+					break;
+				}
+				goto invalid_command;
+
 			case 'c':
 				if( command[1]=='\0' || !strcmp( command, "check" ) )
 				{
@@ -226,16 +256,22 @@ int main()
 					double x;	scanf("%lf", &x);
 					if(x < 0)
 					{
-						printf("Error : Negative values are not.\n");
+						printf("Error: Negative values are not.\n");
 						break;
 					}
 					Users temp = register_usr(userlist, x, bit_value);
 
-					printf("User added successfully\n");
-					printf("User id: %.7d\n", temp->UID);
-					printf("Intial balance: %lf\n", temp->balance);
-					printf("Joining time: %.2d:%.2d\n", temp->join_time.tm_hour,temp->join_time.tm_min);
-					net_data.new_usr++;
+					if( temp==NULL )
+						printf("Sorry. Not enough bitcoins left.\n");
+					else
+					{
+						printf("User added successfully\n");
+						printf("User id: %.7d\n", temp->UID);
+						printf("Intial balance: %lf\n", temp->balance);
+						printf("Joining time: %.2d:%.2d\n", temp->join_time.tm_hour,temp->join_time.tm_min);
+						net_data.new_usr++;
+					}
+
 					break;
 				}
 				goto invalid_command;
