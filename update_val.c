@@ -39,7 +39,7 @@ double upd_val(data_ptr detail, double val)
             usr_change = (__abs(per_uc) / per_uc) * 20;
         else
             usr_change = (val * per_uc) / 400.00;
-        detail->new_usr = detail->old_usr;
+        detail->old_usr = detail->new_usr;
     }
     if (trans_diff >= 10 && per_tc >= 15)
     {
@@ -48,7 +48,7 @@ double upd_val(data_ptr detail, double val)
             trans_change = 10;
         else
             trans_change = (val * per_tc) / 500.00;
-        detail->new_trans = detail->old_trans;
+        detail->old_trans = detail->new_trans;
     }
     else if (trans_diff <= -20 && per_tc <= -20)
     {
@@ -57,7 +57,7 @@ double upd_val(data_ptr detail, double val)
             trans_change = -10;
         else
             trans_change = (val * per_tc) / 500.00;
-        detail->new_trans = detail->old_trans;
+        detail->old_trans = detail->new_trans;
     }
 
     return val + trans_change + usr_change;
