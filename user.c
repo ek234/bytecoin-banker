@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-unsigned int usr_no = 100000;
 #define digits 10000000;
 static double coin_left = 10000000000; //fixed no of bitcoins
 int __find_id()

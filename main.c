@@ -13,8 +13,8 @@
 #define INIT_MAX_USERS 50
 
 void printhelp(){
-	printf("\n\t\t\t\tNAMASKAAR🙏\n\t\t\tWe are here to help you!\n\n\n");
-	printf("Instructions: -\nUse the following commands to move ahead.\n");
+	printf("\n\t\t\tWe are here to help you!\n\n\n");
+	printf("Instructions: -\nUse the following commands to move ahead:\n");
 	printf("1. Press 'register' to register your details.\n");
 	printf("2. Press 'attack' to see your situation with the equity (Attack).\n");
 	printf("3. Press 'transfer' to fill your transaction details.\n");
@@ -31,21 +31,31 @@ void printhelp(){
 int main()
 {
 
-	srand((unsigned) time(NULL));		//seeding randomizer for other functions
+	//seeding randomizer for other functions
+	srand((unsigned) time(NULL));
 
 //	inits
-	Users* userlist = (Users*) malloc( 100000*sizeof(Users) );	// array of ptrs of userslist struct
-	for( int i=0; i<(signed)100000; i++ )
+
+	// max number of users that can be managed at the start of the program
+	usr_no = 100000;
+	// array of ptrs of userslist struct
+	Users* userlist = (Users*) malloc( usr_no*sizeof(Users) );
+	for( int i=0; i<(signed)usr_no; i++ )
 	{
 		userlist[i] = NULL;
 	}
+
+	// head and tail of the block chain
+	head = tail = NULL;
+	// number of blocks currently in the chain
 	int block_num = 0;
 	initBlockArray();
+	// number of transactions in the current block
 	int Ntransactions = 0;
 
-	head = tail = NULL;
-	
+	// the value of bitcoin wrt $
 	double bit_value = 100;
+	// struct containing overhead data about number of users and number of transactions
 	data net_data;
     net_data.old_usr = 0;
     net_data.new_usr = 0;
@@ -53,8 +63,9 @@ int main()
     net_data.new_trans = 0;
 //
 
-	printf("Welcome to %s\n\n", APP_NAME);
-	//printhelp();
+	printf("\n\t\t\t\tNAMASKAAR🙏\n\n\n");
+	printf("\n\t\tWelcome to %s\n\n", APP_NAME);
+	printhelp();
 
 	while(1)
 	{

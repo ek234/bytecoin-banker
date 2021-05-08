@@ -1,0 +1,91 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+APP_NAME	main.c	11;"	d	file:
+Array	bitcoin.h	/^struct Array$/;"	s
+Attack	bitcoin.c	/^int Attack()$/;"	f
+B	bitcoin.h	/^    Block B;$/;"	m	struct:Array
+BLOCK_SIZE	bitcoin.c	9;"	d	file:
+Block	bitcoin.h	/^typedef BlockChain *Block;$/;"	t
+BlockArray	bitcoin.h	/^struct Array BlockArray;$/;"	v	typeref:struct:Array
+BlockChain	bitcoin.h	/^struct BlockChain$/;"	s
+BlockChain	bitcoin.h	/^typedef struct BlockChain BlockChain;$/;"	t	typeref:struct:BlockChain
+ElemType	bitcoin.h	/^typedef int ElemType;$/;"	t
+Hash	hash.c	/^ElemType Hash(Block B)$/;"	f
+Hashkey	bitcoin.h	/^struct Hashkey{$/;"	s
+INIT_MAX_USERS	main.c	13;"	d	file:
+NONCE_SIZE	bitcoin.c	8;"	d	file:
+Nonce	bitcoin.h	/^    int Nonce;$/;"	m	struct:Array
+Nonce	bitcoin.h	/^    int Nonce;$/;"	m	struct:BlockChain
+PtrBlock	bitcoin.c	/^struct Array PtrBlock[51];$/;"	v	typeref:struct:Array
+R_UID	bitcoin.h	/^    int R_UID;$/;"	m	struct:Transaction
+S_UID	bitcoin.h	/^    int S_UID;$/;"	m	struct:Transaction
+T	bitcoin.h	/^    Transact T; \/\/we can also store the transaction history in an array$/;"	m	struct:UserList
+T	bitcoin.h	/^    Transact T;$/;"	m	struct:BlockChain
+Transact	bitcoin.h	/^typedef struct Transaction *Transact;$/;"	t	typeref:struct:Transaction
+Transaction	bitcoin.h	/^struct Transaction$/;"	s
+Transaction	bitcoin.h	/^typedef struct Transaction Transaction;$/;"	t	typeref:struct:Transaction
+UID	bitcoin.h	/^    int UID;$/;"	m	struct:UserList
+UserList	bitcoin.h	/^struct UserList$/;"	s
+UserList	bitcoin.h	/^typedef struct UserList UserList;$/;"	t	typeref:struct:UserList
+Usernext	bitcoin.h	/^typedef UserList *Usernext;$/;"	t
+Users	user.h	/^typedef Usernext Users;$/;"	t
+Validate	bitcoin.c	/^bool Validate()$/;"	f
+__BITCOIN_H	bitcoin.h	2;"	d
+__TRANS_H__	trans.h	2;"	d
+__UPDT_VAL_H__	update_val.h	2;"	d
+__USER_H__	user.h	2;"	d
+__abs	update_val.c	/^double __abs(double x)$/;"	f
+__add_trans_in_usr	trans.c	/^Users __add_trans_in_usr(Users user, Transact transfer)$/;"	f
+__adduser	user.c	/^Users __adduser(Users *user_list, Usernext user)$/;"	f
+__check	user.c	/^int __check(Users *user_list, int id)$/;"	f
+__find_id	user.c	/^int __find_id()$/;"	f
+_time	bitcoin.h	/^typedef struct tm _time;$/;"	t	typeref:struct:tm
+_time	user.h	/^typedef struct tm _time;$/;"	t	typeref:struct:tm
+after_attack	update_val.c	/^double after_attack(double val)$/;"	f
+attack	update_val.c	5;"	d	file:
+balance	bitcoin.h	/^    double balance;$/;"	m	struct:UserList
+block_num	bitcoin.h	/^    int block_num;$/;"	m	struct:BlockChain
+coin_left	user.c	/^static double coin_left = 10000000000;    \/\/fixed no  of bitcoins $/;"	v	file:
+command_length	main.c	12;"	d	file:
+createBlock	bitcoin.c	/^Block createBlock(Transact T, int block_num)$/;"	f
+data	update_val.h	/^struct data$/;"	s
+data	update_val.h	/^typedef struct data data;$/;"	t	typeref:struct:data
+data_ptr	update_val.h	/^typedef data *data_ptr;$/;"	t
+delete_user	user.c	/^double delete_user(Users *user_list, int id, double value)$/;"	f
+digits	user.c	8;"	d	file:
+double_user	user.c	/^void double_user(Users *user_list)$/;"	f
+emptyBlock	bitcoin.c	/^Block emptyBlock(Transact T)$/;"	f
+find_user	user.c	/^Users find_user(Users *user_list, int id)$/;"	f
+hash_val	bitcoin.h	/^    ElemType hash_val;$/;"	m	struct:BlockChain
+hashkey	hash.c	/^struct Hashkey hashkey;$/;"	v	typeref:struct:Hashkey
+hashval	bitcoin.h	/^    int hashval;$/;"	m	struct:Hashkey
+hashval_2	bitcoin.h	/^    int hashval_2;$/;"	m	struct:Hashkey
+head	bitcoin.h	/^Block head;$/;"	v
+initBlock	bitcoin.c	/^Block initBlock(int block_num, Transact T) \/\/will be called by initBlock during the update process of the blockchain->$/;"	f
+initBlockArray	bitcoin.c	/^void initBlockArray()$/;"	f
+init_val	update_val.h	4;"	d
+join_time	bitcoin.h	/^    _time join_time;$/;"	m	struct:UserList
+main	main.c	/^int main()$/;"	f
+new_trans	update_val.h	/^    int new_trans;$/;"	m	struct:data
+new_usr	update_val.h	/^    int new_usr;$/;"	m	struct:data
+next	bitcoin.h	/^    Block next;$/;"	m	struct:BlockChain
+next	bitcoin.h	/^    Transact next;$/;"	m	struct:Transaction
+next	bitcoin.h	/^    Usernext next;$/;"	m	struct:UserList
+old_trans	update_val.h	/^    int old_trans;$/;"	m	struct:data
+old_usr	update_val.h	/^    int old_usr;$/;"	m	struct:data
+prev	bitcoin.h	/^    Block prev;$/;"	m	struct:BlockChain
+prev_block_hash	bitcoin.h	/^    ElemType prev_block_hash;$/;"	m	struct:BlockChain
+printhelp	main.c	/^void printhelp(){$/;"	f
+register_usr	user.c	/^Users register_usr(Users *user_list, double init_val, double value)$/;"	f
+tail	bitcoin.h	/^Block tail;$/;"	v
+time	bitcoin.h	/^    _time time;$/;"	m	struct:Transaction
+total_coins	update_val.h	3;"	d
+tr_amount	bitcoin.h	/^    double tr_amount;$/;"	m	struct:Transaction
+transfer	trans.c	/^Transact transfer(Users *sender, Users *reciver, double amt)$/;"	f
+upd_val	update_val.c	/^double upd_val(data_ptr detail, double val)$/;"	f
+updateBlockArray	bitcoin.c	/^void updateBlockArray(Block *Bl) \/\/pointer to pointer to blockchain$/;"	f
+usr_no	user.c	/^unsigned int usr_no = 100000;$/;"	v
