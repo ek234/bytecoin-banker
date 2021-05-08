@@ -1,10 +1,12 @@
 #include "./user.h"
 #include "./trans.h"
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
 #define digits 10000000;
+#define MINE_AMOUNT 10
 static double coin_left = 10000000000; //fixed no of bitcoins
 int __find_id()
 {
@@ -67,6 +69,25 @@ void double_user(Users *user_list)
     free(user_list);
     user_list = &new_list;
 }
+
+int mine( Users user )
+{
+	// if no more coins are left
+    if (coin_left < MINE_AMOUNT)
+        return -1;
+
+	bool success = rand() % 2;
+
+	// if mine is not successful
+	if( success==0 )
+		return 0;
+
+	// otherwise:
+    user->balance += MINE_AMOUNT;
+
+	return 1;
+}
+
 Users find_user(Users *user_list, int id)
 {
     if (__check(user_list, id) == 1)
