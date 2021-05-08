@@ -220,7 +220,7 @@ int main()
 				{
 					// if the number of users are large enough then double the array
 					if( 10*net_data.new_trans > 7*usr_no )
-						double_user();
+						double_user( userlist );
 
 					printf("Enter the initial amount to deposit: $");
 					double x;	scanf("%lf", &x);
