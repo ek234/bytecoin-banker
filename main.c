@@ -10,6 +10,7 @@
 
 #define APP_NAME "temp name"
 #define command_length 50
+#define trans_per_block 50
 
 void printhelp()
 {
@@ -129,7 +130,7 @@ int main()
 					scanf("%lf", &amount);
 					if(amount < 0)
 					{ 
-						printf("Transaction failed.Negative values are not.\n");
+						printf("Transaction failed. Negative values are not.\n");
 						break;
 					}
 					
@@ -142,11 +143,12 @@ int main()
 						if( tail == NULL )
 						{//	if blockchain does not exist then start a new chain.
 							emptyBlock(current_transaction);
+							block_num = 1;
 							Ntransactions = 1;
 						}
-						else if(Ntransactions >= 50)
+						else if(Ntransactions >= trans_per_block)
 						{//	if the current block is full then make a new one.
-							createBlock(current_transaction, block_num);
+							createBlock(current_transaction, block_num++);
 							Ntransactions = 1;
 						}
 						else
@@ -155,7 +157,7 @@ int main()
 							tail->T = current_transaction;
 							Ntransactions++;
 						}
-/*temp for testing*/	assert(Ntransactions <= 50);
+/*temp for testing*/	assert(Ntransactions <= trans_per_block);
 
 						net_data.new_trans++;
 						printf("Transaction was successful.\n");

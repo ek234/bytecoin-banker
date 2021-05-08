@@ -45,7 +45,7 @@ Block emptyBlock(Transact T)
     Block B = (Block)malloc(sizeof(BlockChain)); //allocating memory for block
     assert(B != NULL);
 
-    int x = rand() % (NONCE_SIZE); //randomly calculating a nonce
+    int x = rand() % (NONCE_SIZE) + 1; //randomly calculating a nonce
 
     B->block_num = 1;      //first block in the blockchain
     B->prev_block_hash = 0;
@@ -71,7 +71,7 @@ Block initBlock(int block_num, Transact T) //will be called by initBlock during 
     Block B = (Block)malloc(sizeof(BlockChain)); //allocating memory for the block
     assert(B != NULL);
 
-    int x = rand() % NONCE_SIZE; //randomly generating a nonce
+    int x = rand() % NONCE_SIZE + 1; //randomly generating a nonce
 
     //writing all necessary details in the block
     B->block_num = block_num;
@@ -115,8 +115,15 @@ int Attack()
 	// if the chosen block exists and is not the current block
     if (PtrBlock[x].B!=NULL && PtrBlock[x].B!=tail)
     {
-        int r = rand() % (NONCE_SIZE - 1);
-        r++; //Now, r is a random int from 1 to NONCE_SIZE-1 inclusive
+		int r;
+		do{
+			r = rand() % (NONCE_SIZE - 1);
+			r++;	//Now, r is a random int from 1 to NONCE_SIZE-1 inclusive
+		} while( PtrBlock[x].Nonce + r == NONCE_SIZE );
+		// the do-while loop ensures that Nonce is never 0
+
+		//  This ensures that Nonce can not remain the same
+		PtrBlock[x].Nonce = (PtrBlock[x].Nonce + r) % NONCE_SIZE;
 
         //	This ensures that Nonce can not remain the same
         PtrBlock[x].Nonce = (PtrBlock[x].Nonce + r) % NONCE_SIZE;
