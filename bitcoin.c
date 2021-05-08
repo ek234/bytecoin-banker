@@ -11,13 +11,13 @@
 
 //Array containing nonce and pointer to block corresponding to the index.
 //Blocks accesible in O(1) time
-struct Array PtrBlock[50];
+struct Array PtrBlock[51];
 
 //intialising PtrBlock[]
 //called in main
 void initBlockArray()
 {
-    for (int i = 0; i <= 50; i++)
+    for (int i = 0; i < 51; i++)
     {
         PtrBlock[i].Nonce = -1;
         PtrBlock[i].B = NULL; //pointer initialised to NULL
