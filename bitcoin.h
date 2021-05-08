@@ -27,7 +27,7 @@ struct UserList
     double balance;
     Transact T; //we can also store the transaction history in an array
     _time join_time;
-    Usernext next;
+    
 };
 
 struct Transaction
