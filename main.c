@@ -127,6 +127,11 @@ int main()
 
 					printf("Enter amount to transfer: ");
 					scanf("%lf", &amount);
+					if(amount < 0)
+					{ 
+						printf("Transaction failed.Negative values are not.\n");
+						break;
+					}
 					
 					Transact current_transaction = transfer( &a, &b, amount);
 
@@ -219,12 +224,17 @@ int main()
 
 					printf("Enter the initial amount to deposit: $");
 					double x;	scanf("%lf", &x);
+					if(x < 0)
+					{
+						printf("Error : Negative values are not.\n");
+						break;
+					}
 					Users temp = register_usr(userlist, x, bit_value);
 
 					printf("User added successfully\n");
 					printf("User id: %.7d\n", temp->UID);
 					printf("Intial balance: %lf\n", temp->balance);
-					printf("joining time: %lld\n", temp->join_time);
+					printf("Joining time: %.2d:%.2d\n", temp->join_time.tm_hour,temp->join_time.tm_min);
 					net_data.new_usr++;
 					break;
 				}
