@@ -8,7 +8,7 @@
 #include "./trans.h"
 #include "./update_val.h"
 
-#define APP_NAME "temp name"
+#define APP_NAME "iiitcoin"
 #define command_length 50
 #define trans_per_block 50
 
@@ -69,7 +69,7 @@ int main()
 //
 
 	printf("\n\t\t\t\t🙏NAMASKAAR🙏\n\n");
-	printf("\n\t\t\tWelcome to %s\n\n", APP_NAME);
+	printf("\n\t\t\t    Welcome to %s\n\n", APP_NAME);
 	printhelp();
 
 	while(1)
