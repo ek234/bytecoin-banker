@@ -12,7 +12,9 @@
 #define command_length 50
 #define INIT_MAX_USERS 50
 
-void printhelp(){
+void printhelp()
+{
+	// help page
 	printf("\n\t\t\tWe are here to help you!\n\n\n");
 	printf("Instructions: -\nUse the following commands to move ahead:\n");
 	printf("1. Press 'register' to register your details.\n");
@@ -99,6 +101,53 @@ int main()
 				// then command was invalid.
 				goto invalid_command;
 
+			case 't':
+				if( command[1]=='\0' || !strcmp( command, "transfer" ) )
+				{
+					int s_uid, r_uid;
+					double amount;
+					printf("Starting transaction\n");
+					printf("Enter sender's id: ");
+					scanf("%d", &s_uid);
+					printf("Enter reciever's id: ");
+					scanf("%d", &r_uid);
+					printf("Enter amount to transfer: ");
+					scanf("%lf", &amount);
+					
+					// find users from userlist
+					Users a = find_user(userlist, s_uid);
+					Users b = find_user(userlist, r_uid);
+					Transact current_transaction = transfer( &a, &b, amount);
+
+					if( current_transaction == NULL )
+						printf("Transaction failed. Check if sender has enough balance.\n");
+					else
+					{
+						if( tail == NULL )
+						{//	if blockchain does not exist then start a new chain.
+							emptyBlock(current_transaction);
+							Ntransactions = 1;
+						}
+						else if(Ntransactions >= 50)
+						{//	if the current block is full then make a new one.
+							createBlock(current_transaction, block_num);
+							Ntransactions = 1;
+						}
+						else
+						{//	otherwise, add transaction to the block.
+							current_transaction->next = tail->T;
+							tail->T = current_transaction;
+							Ntransactions++;
+						}
+/*temp for testing*/	assert(Ntransactions <= 50);
+
+						net_data.new_trans++;
+						printf("Transaction was successful.\n");
+					}
+					break;
+				}
+				goto invalid_command;
+
 			case 'b':
 				if( command[1]=='\0' || !strcmp( command, "balance" ) )
 				{
@@ -144,7 +193,7 @@ int main()
 					{
 						net_data.new_usr--;
 						printf("Account successfully unregistered.\n");
-						printf("Returning balance: %lf\n", bal);
+						printf("Returning balance: $%lf\n", bal);
 					}
 					break;
 				}
@@ -154,65 +203,12 @@ int main()
 				if( command[1]=='\0' || !strcmp( command, "register" ) )
 				{
 					printf("Enter the initial amount to deposit: $");
-					double x;
-					scanf("%lf", &x);
+					double x;	scanf("%lf", &x);
 					Users temp = register_usr(userlist, x, bit_value);
-//					if( temp!=userlist )
-//					{
-//						free(userlist);
-//						userlist = temp;
-//					}
+
 					printf("User added successfully\n");
 					printf("User id: %.7d\n", temp->UID);
 					net_data.new_usr++;
-					break;
-				}
-				goto invalid_command;
-
-			case 't':
-				if( command[1]=='\0' || !strcmp( command, "transfer" ) )
-				{
-					int s_uid, r_uid;
-					double amount;
-					printf("Starting transaction\n");
-					printf("Enter sender's id: ");
-					scanf("%d", &s_uid);
-					printf("Enter reciever's id: ");
-					scanf("%d", &r_uid);
-					printf("Enter amount to transfer: ");
-					scanf("%lf", &amount);
-					
-					Users a = find_user(userlist, s_uid);
-					Users b = find_user(userlist, r_uid);
-					Transact current_transaction = transfer( &a, &b, amount);
-
-					if( current_transaction == 0 )
-						printf("Transaction failed.\n");
-					else
-					{
-						if( tail == NULL )
-//						if( head == NULL )
-						{
-							emptyBlock(current_transaction);
-							Ntransactions = 1;
-						}
-						else if(Ntransactions >= 50)
-						{
-							createBlock(current_transaction, block_num);
-							Ntransactions = 1;
-						}
-						else
-						{
-							current_transaction->next = tail->T;
-							tail->T = current_transaction;
-							Ntransactions++;
-						}
-		/*temp for testing*/ assert(Ntransactions <= 50);
-
-						net_data.new_trans += 1;
-						printf("Transaction was successful.\n");
-					}
-					
 					break;
 				}
 				goto invalid_command;
@@ -262,6 +258,11 @@ int main()
 
 		}
 	}
+
+	// freeing users
+	for( int i=0; i<(signed)usr_no; i++ )
+		if( userlist[i] != NULL )
+			free( userlist[i] );
 
 exit:
 	printf("Thank you for using %s\n\n", APP_NAME);
