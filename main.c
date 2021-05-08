@@ -10,7 +10,6 @@
 
 #define APP_NAME "temp name"
 #define command_length 50
-#define INIT_MAX_USERS 50
 
 void printhelp()
 {
@@ -219,6 +218,10 @@ int main()
 			case 'r':
 				if( command[1]=='\0' || !strcmp( command, "register" ) )
 				{
+					// if the number of users are large enough then double the array
+					if( 10*net_data.new_trans > 7*usr_no )
+						double_user();
+
 					printf("Enter the initial amount to deposit: $");
 					double x;	scanf("%lf", &x);
 					if(x < 0)
