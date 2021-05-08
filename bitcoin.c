@@ -53,7 +53,7 @@ Block emptyBlock(Transact T)
     B->Nonce = x;
     B->next = NULL;
     B->prev = NULL;
-//    B->hash_val = Hash(B); //calculating hash val od the first block
+    B->hash_val = Hash(B); //calculating hash val od the first block
 
     head = B; //updating gloabal variable head
     tail = head;    //updating global variable tail
@@ -80,7 +80,7 @@ Block initBlock(int block_num, Transact T) //will be called by initBlock during 
     B->Nonce = x;
     B->next = NULL;
     B->prev = tail;
-//    B->hash_val = Hash(B); //calculating hash value using hash function
+    B->hash_val = Hash(B); //calculating hash value using hash function
 
     tail->next = B; //insert at rear of the blockchain
     tail = B;
@@ -112,7 +112,6 @@ int Attack()
     if(head == NULL)
         return -1;
     int x = rand() % BLOCK_SIZE; //randomly checing if a block exists in the blockchain
-
     if (PtrBlock[x].B != NULL)
     {
         int r = rand() % (NONCE_SIZE - 1);
@@ -132,12 +131,8 @@ bool Validate()
 {
     bool flag_invalid_chain = 0;
     
-    if (tail != NULL)
-    {
-        Block current = tail;
-    }
-    else
-        return 0;  //chain doesen't exist so it is valid
+    if (tail == NULL)
+        return 0;   //chain doesen't exist so it is valid
 
     Block current = tail;
     while (current->prev != NULL)
