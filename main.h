@@ -20,7 +20,7 @@ void printhelp()
 	printf("\n\t\t\tWe are here to help you!\n");
 	reset();
 	cyan();
-	printf("Instructions: -\nUse the following commands to move ahead:\n");
+	printf("\nInstructions: -\nUse the following commands to move ahead:\n");
 	reset();
 	printf("1.\tPress 'attack' to see your situation with the equity (Attack).\n");
 	printf("2.\tPress 'balance' to check the balance no. of bitcoins.\n");
