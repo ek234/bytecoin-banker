@@ -1,3 +1,6 @@
+#ifndef __MAIN_H
+#define __MAIN_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -39,3 +42,5 @@ void printhelp()
 	printf("\n\t\t\tHave a smooth Experience here. Stay Safe🌻\n");
 	reset();
 }
+
+#endif
