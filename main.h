@@ -9,7 +9,7 @@
 #include "./update_val.h"
 #include "./color.h"
 
-#define APP_NAME "iiitcoin"
+#define APP_NAME "IIIT.C0IN"
 #define command_length 50
 #define trans_per_block 50
 
@@ -17,7 +17,7 @@ void printhelp()
 {
 	// help page
 	Bcyan();
-	printf("\n\t\t\tWe are here to help you!\n");
+	printf("\n\t\tWe are here to help you!\n");
 	reset();
 	cyan();
 	printf("Instructions: -\nUse the following commands to move ahead:\n");
@@ -36,6 +36,6 @@ void printhelp()
 	printf("Note: in %s v0.5+, users can select only the first alphabet of the command.\n", APP_NAME);
 	printf("\n%s v0.6.01\n", APP_NAME);
 	cyan();
-	printf("\n\t\t\tHave a smooth Experience here. Stay Safe🌻\n");
+	printf("\n\t  Have a smooth Experience here. Stay Safe🌻\n");
 	reset();
 }

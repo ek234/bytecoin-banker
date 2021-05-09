@@ -1,11 +1,11 @@
-# Bitcoin
+# IIIT.C0IN
 <img src="https://github.com/rishabh770/Bitcoin/blob/master/iiit-coin.jpg" alt="drawing" width="200px;">  
 
 ## This is a group project made during DSA course at IIIT-H.  
 - There will be a total of *10 billion* bitcoins of which can be bought by users.   
 - Value of ***Bitcoin*** keep changing with the flow of the trading.  
 - To have a smooth and full experience of this programe we recommend you to make these changes to your terminal 
-    - Make background color to black(R = 30; G = 30; B = 30).
+    - Make background color to black (R = 30; G = 30; B = 30).
     - Maximize your terminal window. 
 - To Start Programme enter this command in your Terminal. This bash file has all the  
 commands necessary to compile and execute the programme   
@@ -31,7 +31,7 @@ $./run.sh
     8. **Mine Bitcoin** : Gives you Some Bitcoins if you answer our Question correctly.  
         **Syntax** `mine` alias `m` 
     9. **Transaction History** : Shows last 5 transaction of a user.Takes a valid user id as input.
-        **Syntax** `history` alias  
+        **Syntax** `past` alias `p` 
     10. **Unregister** : To delete your ID and Withdraw all the coins from your account.  
         **Syntax** `unregister` alias `u`
     11. **Exit Programe** : Terminates the programme.  
