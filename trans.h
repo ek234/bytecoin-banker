@@ -4,5 +4,5 @@
 #include "./user.h"
 
 Transact transfer(Users *sender, Users *reciver, double amt);
-
+int trans_history(Users user);
 #endif
