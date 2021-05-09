@@ -6,6 +6,7 @@ typedef Usernext Users;
 unsigned int usr_no;
 
 Users register_usr(Users *user_list, double init_val, double value);
+int mine(Users user);
 double delete_user(Users *user_list, int id, double value);
 void double_user(Users *user_list);
 Users find_user(Users *user_list, int id);

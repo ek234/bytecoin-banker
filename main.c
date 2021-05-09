@@ -8,14 +8,47 @@
 #include "./trans.h"
 #include "./update_val.h"
 
-#define APP_NAME "temp name"
+#define APP_NAME "iiitcoin"
 #define command_length 50
+#define trans_per_block 50
+
+void Bblack(){
+	printf("\033[1;30m");
+}
+void black(){
+	printf("\033[0;30m");
+}
+void red(){
+	printf("\033[1;31m");
+}
+void green(){
+	printf("\033[1;32m");
+}
+void yellow(){
+	printf("\033[1;33m");
+}
+void blue(){
+	printf("\033[1;34m");
+}
+void cyan(){
+	printf("\033[1;36m");
+}
+void white(){
+	printf("\033[1;37m");
+}
+void reset(){
+	printf("\033[0m");
+}
 
 void printhelp()
 {
 	// help page
-	printf("\n\t\t\tWe are here to help you!\n\n");
+	Bblack();
+	printf("\n\t\t\tWe are here to help you!\n");
+	reset();
+	black();
 	printf("Instructions: -\nUse the following commands to move ahead:\n");
+	reset();
 	printf("1.\tPress 'register' to register your details.\n");
 	printf("2.\tPress 'balance' to check the balance no. of bitcoins.\n");
 	printf("3.\tPress 'check' to check the value of bitcoin with respect to $.\n");
@@ -28,7 +61,9 @@ void printhelp()
 	printf("10.\tPress 'exit' to exit from the page.\n");
 	printf("Note: in %s v0.5+, users can select only the first alphabet of the command.\n", APP_NAME);
 	printf("\n%s v0.6.01\n", APP_NAME);
+	cyan();
 	printf("\n\t\t\tHave a smooth Experience here. Stay Safe🌻\n");
+	reset();
 }
 	   
 	       
@@ -44,7 +79,7 @@ int main()
 	usr_no = 100000;
 	// array of ptrs of userslist struct
 	Users* userlist = (Users*) malloc( usr_no*sizeof(Users) );
-	for( int i=0; i<(signed)usr_no; i++ )
+	for( unsigned int i=0; i<usr_no; i++ )
 	{
 		userlist[i] = NULL;
 	}
@@ -66,33 +101,42 @@ int main()
     net_data.old_trans = 0;
     net_data.new_trans = 0;
 //
-
-	printf("\n\t\t\t\tNAMASKAAR🙏\n\n");
-	printf("\n\t\t\tWelcome to %s\n\n", APP_NAME);
+	cyan();
+	printf("\n\t\t\t\t🙏NAMASKAAR🙏\n\n");
+	printf("\n\t\t\t    Welcome to %s\n\n", APP_NAME);
+	reset();
 	printhelp();
 
 	while(1)
 	{
-		printf("Please enter the command: ");
+		black();
+		printf("\nPlease enter the command: ");
 		char command[command_length];
 		scanf("%s", command);
+		reset();
 
 		//running switch-case on the first char of the command to reduce the number of comparisons
 		switch( command[0] )
 		{
 			case 'a':
 				// if command[1] is a null char, then the command was "a". this is accepted
-				if( command[1]=='\0' || !strcmp( command, "attack" ) )
+				if( command[1] == '\0' || !strcmp( command, "attack" ) )
 				{
 					printf("Let's see who's taking the Majority Control!\n");
-					printf("ATTACK!!!\n");
+					red();
+					printf("\t\t\tATTACK!!!\n");
+					reset();
 
 					int x = Attack();
-					if( x == -1 )
+					if( x == -1 ){
+						red();
 						printf("Attack failed :(\n");
-					else
-					{
+						reset();
+					}
+					else{
+						green();
 						printf("Successful att4ck. Compromised block number: %d\n", x);
+						reset();
 						bit_value = after_attack(bit_value);
 					}
 
@@ -103,7 +147,7 @@ int main()
 				goto invalid_command;
 
 			case 't':
-				if( command[1]=='\0' || !strcmp( command, "transfer" ) )
+				if( command[1] == '\0' || !strcmp( command, "transfer" ) )
 				{
 					int s_uid, r_uid;
 					Users a, b;
@@ -112,50 +156,58 @@ int main()
 
 					// taking senders UID until it's valid
 					do{
-						printf("Enter sender's id: ");
+						printf("Enter sender's ID: ");
 						scanf("%d", &s_uid);
 						// finding sender
 						a = find_user(userlist, s_uid);
-					} while( a==NULL && printf("Invalid UID\n") );
+					} while( a == NULL && printf("Invalid UID\n") );
 					// taking reciever's UID until it's valid
 					do{
-						printf("Enter reciever's id: ");
+						printf("Enter reciever's ID: ");
 						scanf("%d", &r_uid);
 						// finding reciever
 						b = find_user(userlist, r_uid);
-					} while( b==NULL && printf("Invalid UID\n") );
+					} while( b == NULL && printf("Invalid UID\n") );
 
 					printf("Enter amount to transfer: ");
 					scanf("%lf", &amount);
 					if(amount < 0)
 					{ 
-						printf("Transaction failed.Negative values are not.\n");
+						red();
+						printf("Transaction failed. Negative values are not allowed.\n");
+						reset();
 						break;
 					}
 					
 					Transact current_transaction = transfer( &a, &b, amount);
 
-					if( current_transaction == NULL )
-						printf("Transaction failed. Check if sender has enough balance.\n");
+					if( current_transaction == NULL ){
+						red();
+						printf("Oops! Transaction failed.\n");
+						reset();
+						printf("Check if sender has enough balance.\n");
+					}
+					
 					else
 					{
 						if( tail == NULL )
 						{//	if blockchain does not exist then start a new chain.
 							emptyBlock(current_transaction);
+							block_num = 1;
 							Ntransactions = 1;
 						}
-						else if(Ntransactions >= 50)
+						else if(Ntransactions >= trans_per_block)
 						{//	if the current block is full then make a new one.
-							createBlock(current_transaction, block_num);
+							createBlock(current_transaction, block_num++);
 							Ntransactions = 1;
 						}
 						else
 						{//	otherwise, add transaction to the block.
-							current_transaction->next = tail->T;
-							tail->T = current_transaction;
+							current_transaction -> next = tail -> T;
+							tail -> T = current_transaction;
 							Ntransactions++;
 						}
-/*temp for testing*/	assert(Ntransactions <= 50);
+/*temp for testing*/	assert(Ntransactions <= trans_per_block);
 
 						net_data.new_trans++;
 						printf("Transaction was successful.\n");
@@ -165,45 +217,94 @@ int main()
 				goto invalid_command;
 
 			case 'b':
-				if( command[1]=='\0' || !strcmp( command, "balance" ) )
+				if( command[1] == '\0' || !strcmp( command, "balance" ) )
 				{
-					printf("Enter the user id: ");
-					int uid;	scanf("%d", &uid);
+					printf("Enter the user ID: ");
+					int uid;	
+					scanf("%d", &uid);
 					Users temp = find_user(userlist, uid);
 					
-					if( temp==NULL )
+					if( temp == NULL )
 					{
-						printf("Error: user id doesn't exist\n");
+						red();
+						printf("Error: user ID doesn't exist\n");
+						reset();
 					}
 					else
 					{	
-						double bal = temp->balance;
+						double bal = temp -> balance;
+						white();
 						printf("Current balance: %g Bitcoin\n", bal);
+						reset();
+					}
+					break;
+				}
+				goto invalid_command;
+
+			case 'm':
+				if( command[1]=='\0' || !strcmp( command, "mine" ) )
+				{
+					printf("Enter the user ID: ");
+					int uid;	
+					scanf("%d", &uid);
+					Users temp_user = find_user(userlist, uid);
+					
+					if( temp_user == NULL )
+					{
+						red();
+						printf("Error: user ID doesn't exist\n");
+						reset();
+					}
+					else
+					{	
+						bool mined = mine( temp_user );
+
+						if( mined == 1 )
+						{
+							yellow();
+							printf("Congratulations!! You successfully mined bitcoins.\n");
+							reset();
+							double bal = temp_user -> balance;
+							printf("Current balance in your account: %g Bitcoin\n", bal);
+						}
+						else if( mined==-1 ){
+							blue();
+							printf("Sorry. Not enough bitcoins left.\n");
+							reset();
+						}
+						else{
+							blue();
+							printf("Sorry. Mine unsuccessful.\n");
+							reset();
+						}
 					}
 					break;
 				}
 				goto invalid_command;
 
 			case 'c':
-				if( command[1]=='\0' || !strcmp( command, "check" ) )
+				if( command[1] == '\0' || !strcmp( command, "check" ) )
 				{
 					bit_value = upd_val( &net_data, bit_value );
-					printf("Current Value of bitcoin: %lf\n", bit_value);
+					printf("Current Value of bitcoin: $%g\n", bit_value);
 					break;
 				}
 				goto invalid_command;
 
 			case 'u':
-				if( command[1]=='\0' || !strcmp( command, "unregister" ) )
+				if( command[1] == '\0' || !strcmp( command, "unregister" ) )
 				{
-					printf("Enter the user id: ");
-					int uid;	scanf("%d", &uid);
+					printf("Enter the user ID: ");
+					int uid;	
+					scanf("%d", &uid);
 
 					bit_value = upd_val( &net_data, bit_value );
 					double bal = delete_user(userlist, uid, bit_value);
 					if( bal==-1 )
 					{
-						printf("Error: user id doesn't exist\n");
+						red();
+						printf("Error: user ID doesn't exist\n");
+						reset();
 					}
 					else
 					{
@@ -220,22 +321,36 @@ int main()
 				{
 					// if the number of users are large enough then double the array
 					if( 10*net_data.new_trans > 7*usr_no )
-						double_user();
+						double_user( userlist );
 
 					printf("Enter the initial amount to deposit: $");
-					double x;	scanf("%lf", &x);
+					double x;	
+					scanf("%lf", &x);
 					if(x < 0)
 					{
-						printf("Error : Negative values are not.\n");
+						red();
+						printf("Error: Negative values not allowed.\n");
+						reset();
 						break;
 					}
 					Users temp = register_usr(userlist, x, bit_value);
 
-					printf("User added successfully\n");
-					printf("User id: %.7d\n", temp->UID);
-					printf("Intial balance: %lf\n", temp->balance);
-					printf("Joining time: %.2d:%.2d\n", temp->join_time.tm_hour,temp->join_time.tm_min);
-					net_data.new_usr++;
+					if( temp==NULL ){
+						blue();
+						printf("Sorry. Not enough bitcoins left.\n");
+						reset();
+					}
+					else
+					{
+						green();
+						printf("User added successfully\n");
+						reset();
+						printf("User id: %.7d\n", temp -> UID);
+						printf("Intial balance: %lf\n", temp -> balance);
+						printf("Joining time: %.2d:%.2d\n", temp->join_time.tm_hour, temp->join_time.tm_min);
+						net_data.new_usr++;
+					}
+
 					break;
 				}
 				goto invalid_command;
@@ -247,9 +362,12 @@ int main()
 					v = Validate();
 					printf("--:Checking Validity:--\n");
 					if(v == 0){
+						green();
 						printf("\nNO ERROR\n\t\t\tCheers!!\n");
+						reset();
 					}
 					else if(v == 1){
+						blue();
 						printf("\nBlock Chain needs Fixing\n");
 						printf("Resolving errors");
 						for( int i=0; i<5; i++ )
@@ -258,6 +376,7 @@ int main()
 							printf(".");
 						}
 						printf("\nAll the errors have been resolved.\n");
+						reset();
 					}
 					break;
 				}
@@ -286,12 +405,17 @@ int main()
 		}
 	}
 
-	// freeing users
-	for( int i=0; i<(signed)usr_no; i++ )
-		if( userlist[i] != NULL )
-			free( userlist[i] );
+exit:;
 
-exit:
+	// freeing users
+	for( unsigned int i = 0; i < usr_no; i++ )
+		if( userlist[i] != NULL )
+		{
+			free( userlist[i] );
+		}
+		
+	cyan();
+
 	printf("Thank you for using %s\n\n", APP_NAME);
 
     return 0;
