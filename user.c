@@ -17,7 +17,7 @@ int __check(Users *user_list, int id)
 {
 
     Users temp = user_list[id % usr_no];
-    if (temp == NULL)
+    if (temp == NULL && id != 0)
         return 1;
     else
         return -1;

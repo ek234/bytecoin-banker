@@ -12,11 +12,13 @@ Users __add_trans_in_usr(Users user, Transact transfer)
         temp->S_UID = 0;
         temp->tr_amount = 0;
     }
-
-    while (temp->next != NULL)
+    transfer->next = temp;
+    user->T = transfer;
+    /* while (temp->next != NULL)
         temp = temp->next;
 
     temp->next = transfer;
+     */
     return user;
 }
 Transact transfer(Users *sender, Users *reciver, double amt)
@@ -47,4 +49,25 @@ Transact transfer(Users *sender, Users *reciver, double amt)
 
     // return address of transaction so that is can be adden in block chain
     return temp;
+}
+int trans_history(Users user)
+{
+    Transact temp = user->T;
+    if (temp == NULL)
+    {
+        printf("Transaction History not found!!\n");
+        return 0;
+    }
+    int i = 0;
+    while (temp->next != NULL && i < 5)
+    {
+        printf("%d.\n", i + 1);
+        printf("Sender ID : %d\n", temp->S_UID);
+        printf("Reciver ID : %d\n", temp->R_UID);
+        printf("Amount Transfered : %g\n", temp->tr_amount);
+        printf("Time of transaction : %.2d:%.2d\n", temp->time.tm_hour, temp->time.tm_min);
+        temp = temp->next;
+        ++i;
+    }
+    return 0;
 }
