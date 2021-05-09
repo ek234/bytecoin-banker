@@ -17,6 +17,7 @@ void Bblack(){
 }
 void black(){
 	printf("\033[0;30m");
+}
 void red(){
 	printf("\033[1;31m");
 }
