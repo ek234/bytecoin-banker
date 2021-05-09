@@ -33,10 +33,13 @@ int main()
     net_data.new_usr = 0;
     net_data.old_trans = 0;
     net_data.new_trans = 0;
+	Transact head_trans = (Transact)malloc(sizeof(Transaction));
+	head_trans->next = NULL;
+
 //
 	cyan();
-	printf("\n\t\t\t\t🙏NAMASKAAR🙏\n");
-	printf("\n\t\t\t    Welcome to %s\n", APP_NAME);
+	printf("\n\t\t     🙏NAMASKAAR🙏\n");
+	printf("\n\t\t Welcome to %s\n", APP_NAME);
 	reset();
 	printhelp();
 
@@ -46,6 +49,7 @@ int main()
 		printf("\nPlease enter the command: ");
 		char command[command_length];
 		scanf("%s", command);
+		while(getchar() != '\n');
 		reset();
 
 		//running switch-case on the first char of the command to reduce the number of comparisons
@@ -91,20 +95,21 @@ int main()
 					do{
 						printf("Enter sender's ID: ");
 						scanf("%d", &s_uid);
+						while(getchar() != '\n');
 						// finding sender
 						a = find_user(userlist, s_uid);
 					} while( a == NULL && printf("Invalid UID\n") );
 					// taking reciever's UID until it's valid
 					do{
-						printf("Enter reciever's ID: ");
+						printf("Enter receiver's ID: ");
 						scanf("%d", &r_uid);
+						while(getchar() != '\n');
 						// finding reciever
 						b = find_user(userlist, r_uid);
-					} while( b == NULL && printf("Invalid UID\n") );
-
-					printf("Enter amount to transfer: ");
-					scanf("%lf", &amount);
-					if(amount < 0)
+					} while( (b == NULL || r_uid == s_uid) && printf("Invalid UID\n") );
+					printf("Enter coin to transfer: ");
+					
+					if(!scanf("%lf", &amount) || amount < 0 )
 					{ 
 						red();
 						printf("Transaction failed. Negative values are not allowed.\n");
@@ -113,7 +118,11 @@ int main()
 					}
 					
 					Transact current_transaction = transfer( &a, &b, amount);
-
+					if(amount > 50)
+						net_data.new_trans++;
+					amount =0;
+					s_uid =0;
+					r_uid = 0;
 					if( current_transaction == NULL ){
 						red();
 						printf("Oops! Transaction failed.\n");
@@ -123,28 +132,31 @@ int main()
 					
 					else
 					{
-						if( tail == NULL )
-						{//	if blockchain does not exist then start a new chain.
-							emptyBlock(current_transaction);
-							block_num = 1;
+						if( Ntransactions < trans_per_block )
+						{ //Add transactions in a link list until 50 transactions aren't completed.
+							current_transaction->next = head_trans->next;
+							head_trans->next = current_transaction;
+							Ntransactions += 1;
+						}
+						else 
+						{//	if the 50 transactions are comopleted tehn make a new block.
+							if(tail == NULL )
+							{
+								emptyBlock(head_trans);
+								block_num = 1;
+							}
+							else
+								createBlock(head_trans, block_num++);
+							head_trans->next = NULL;
 							Ntransactions = 1;
 						}
-						else if(Ntransactions >= trans_per_block)
-						{//	if the current block is full then make a new one.
-							createBlock(current_transaction, block_num++);
-							Ntransactions = 1;
-						}
-						else
-						{//	otherwise, add transaction to the block.
-							current_transaction -> next = tail -> T;
-							tail -> T = current_transaction;
-							Ntransactions++;
-						}
+						
 /*temp for testing*/	assert(Ntransactions <= trans_per_block);
 
-						net_data.new_trans++;
+						
 						green();
 						printf("Transaction was successful.\n");
+						bit_value = upd_val(&net_data,bit_value);
 						reset();
 					}
 					break;
@@ -156,7 +168,14 @@ int main()
 				{
 					printf("Enter the user ID: ");
 					int uid;	
-					scanf("%d", &uid);
+					if(!scanf("%d", &uid) && uid < 0)
+					{
+						red();
+						printf("Error: user ID doesn't exist\n");
+						reset();
+					}
+
+					while(getchar() != '\n');
 					Users temp = find_user(userlist, uid);
 					
 					if( temp == NULL )
@@ -181,7 +200,13 @@ int main()
 				{
 					printf("Enter the user ID: ");
 					int uid;	
-					scanf("%d", &uid);
+					if(!scanf("%d", &uid) && uid < 0)
+					{
+						red();
+						printf("Error: user ID doesn't exist\n");
+						reset();
+					}
+					while(getchar() != '\n');
 					Users temp_user = find_user(userlist, uid);
 					
 					if( temp_user == NULL )
@@ -232,7 +257,12 @@ int main()
 				{
 					printf("Enter the user ID: ");
 					int uid;	
-					scanf("%d", &uid);
+					if(!scanf("%d", &uid) && uid < 0)
+					{
+						red();
+						printf("Error: user ID doesn't exist\n");
+						reset();
+					}
 
 					bit_value = upd_val( &net_data, bit_value );
 					double bal = delete_user(userlist, uid, bit_value);
@@ -264,6 +294,7 @@ int main()
 					printf("Enter the initial amount to deposit: $");
 					double x;	
 					scanf("%lf", &x);
+					while(getchar() != '\n');
 					if(x < 0)
 					{
 						red();
@@ -284,9 +315,10 @@ int main()
 						printf("User added successfully\n");
 						reset();
 						printf("User id: %.7d\n", temp -> UID);
-						printf("Intial balance: %lf\n", temp -> balance);
+						printf("Intial balance: %lg\n", temp -> balance);
 						printf("Joining time: %.2d:%.2d\n", temp->join_time.tm_hour, temp->join_time.tm_min);
 						net_data.new_usr++;
+						bit_value = upd_val(&net_data,bit_value);
 					}
 
 					break;
@@ -325,7 +357,13 @@ int main()
 				{
 					printf("Enter the user ID: ");
 					int uid;	
-					scanf("%d", &uid);
+					if(!scanf("%d", &uid) && uid < 0)
+					{
+						red();
+						printf("Error: user ID doesn't exist\n");
+						reset();
+					}
+					while(getchar() != '\n');
 					Users user = find_user(userlist, uid);
 					
 					if( user == NULL )
@@ -346,7 +384,7 @@ int main()
 					}
 
 					int i = 0;
-					while (temp->next != NULL && i < 5)
+					while (temp != NULL && i < 5)
 					{
 						white();
 						printf("%d.\n", i + 1);
