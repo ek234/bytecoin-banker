@@ -39,7 +39,7 @@ void Bcyan()
 
 void cyan()
 {
-	printf("\033[0;30m");
+	printf("\033[0;36m");
 }
 
 void white()
