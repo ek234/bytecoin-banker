@@ -22,16 +22,17 @@ void printhelp()
 	cyan();
 	printf("Instructions: -\nUse the following commands to move ahead:\n");
 	reset();
-	printf("1.\tPress 'register' to register your details.\n");
+	printf("1.\tPress 'attack' to see your situation with the equity (Attack).\n");
 	printf("2.\tPress 'balance' to check the balance no. of bitcoins.\n");
 	printf("3.\tPress 'check' to check the value of bitcoin with respect to $.\n");
-	printf("4.\tPress 'mine' to mine bitcoins.\n");
-	printf("5.\tPress 'transfer' to fill your transaction details.\n");
-	printf("6.\tPress 'unregister' to remove your details from the list.\n");
-	printf("7.\tPress 'attack' to see your situation with the equity (Attack).\n");
-	printf("8.\tPress 'validity' to check the validity of your Block Chain.\n");
-	printf("9.\tPress 'help' to return to the set of instructions.\n");
-	printf("10.\tPress 'exit' to exit from the page.\n");
+	printf("4.\tPress 'help' to return to the set of instructions.\n");
+	printf("5.\tPress 'past' to display upto the last 5 transaction of a user\n");
+	printf("6.\tPress 'mine' to mine bitcoins.\n");
+	printf("7.\tPress 'register' to register your details.\n");
+	printf("8.\tPress 'transfer' to fill your transaction details.\n");
+	printf("9.\tPress 'unregister' to remove your details from the list.\n");
+	printf("10.\tPress 'validity' to check the validity of your Block Chain.\n");
+	printf("11.\tPress 'exit' to exit from the page.\n");
 	printf("Note: in %s v0.5+, users can select only the first alphabet of the command.\n", APP_NAME);
 	printf("\n%s v0.6.01\n", APP_NAME);
 	cyan();
@@ -183,7 +184,9 @@ int main()
 /*temp for testing*/	assert(Ntransactions <= trans_per_block);
 
 						net_data.new_trans++;
+						green();
 						printf("Transaction was successful.\n");
+						reset();
 					}
 					break;
 				}
@@ -234,19 +237,20 @@ int main()
 
 						if( mined == 1 )
 						{
-							yellow();
+							//yellow();
+							green();
 							printf("Congratulations!! You successfully mined bitcoins.\n");
 							reset();
 							double bal = temp_user -> balance;
 							printf("Current balance in your account: %g Bitcoin\n", bal);
 						}
 						else if( mined==-1 ){
-							blue();
+							red();
 							printf("Sorry. Not enough bitcoins left.\n");
 							reset();
 						}
 						else{
-							blue();
+							red();
 							printf("Sorry. Mine unsuccessful.\n");
 							reset();
 						}
@@ -282,7 +286,9 @@ int main()
 					else
 					{
 						net_data.new_usr--;
+						green();
 						printf("Account successfully unregistered.\n");
+						reset();
 						printf("Returning balance: $%lf\n", bal);
 					}
 					break;
@@ -309,7 +315,7 @@ int main()
 					Users temp = register_usr(userlist, x, bit_value);
 
 					if( temp==NULL ){
-						blue();
+						red();
 						printf("Sorry. Not enough bitcoins left.\n");
 						reset();
 					}
@@ -355,6 +361,31 @@ int main()
 				}
 				goto invalid_command;
 
+			case 'p':
+				if( command[1] == '\0' || !strcmp( command, "history" ) )
+				{
+					printf("Enter the user ID: ");
+					int uid;	
+					scanf("%d", &uid);
+					Users temp = find_user(userlist, uid);
+					
+					if( temp == NULL )
+					{
+						red();
+						printf("Error: user ID doesn't exist\n");
+						reset();
+					}
+					else
+					{	
+						white();
+						trans_history( temp );
+						reset();
+					}
+
+					break;
+				}
+				goto invalid_command;
+
 			case 'h':
 				if( command[1]=='\0' || !strcmp( command, "help" ) )
 				{
@@ -372,7 +403,9 @@ int main()
 
 			default:
 				invalid_command:
-				printf("Commnd not recognized. Refer to help page:");
+				red();
+				printf("Command not recognized. Refer to help page:");
+				reset();
 				printhelp();
 
 		}
