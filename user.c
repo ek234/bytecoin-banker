@@ -70,26 +70,28 @@ void double_user(Users *user_list)
     user_list = &new_list;
 }
 
-int mine( Users user )
+int mine(Users user)
 {
-	// if no more coins are left
+    // if no more coins are left
     if (coin_left < MINE_AMOUNT)
         return -1;
 
-	bool success = rand() % 2;
+    bool success = rand() % 2;
 
-	// if mine is not successful
-	if( success==0 )
-		return 0;
+    // if mine is not successful
+    if (success == 0)
+        return 0;
 
-	// otherwise:
+    // otherwise:
     user->balance += MINE_AMOUNT;
 
-	return 1;
+    return 1;
 }
 
 Users find_user(Users *user_list, int id)
 {
+    if (id <= 0)
+        return NULL;
     if (__check(user_list, id) == 1)
         return NULL; ////return NULL if id is wrong
     int hash_key = id % usr_no;
@@ -104,7 +106,7 @@ double delete_user(Users *user_list, int id, double value)
         return -1.00;
     double bal = temp->balance * value;
     coin_left += temp->balance;
-	user_list[hash_key] = NULL;
+    user_list[hash_key] = NULL;
     free(temp);
     return bal;
 }
