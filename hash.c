@@ -14,18 +14,18 @@ ElemType Hash(Block B)
     temp = B->T->next;
     while(temp != NULL)
     {
-    hashkey.hashval_2 += (int)(temp->S_UID + temp->R_UID + temp->tr_amount) % B->block_num;
-    temp = temp->next;
+        hashkey.hashval_2 += (int)(temp->S_UID + temp->R_UID + temp->tr_amount) % B->block_num;
+        temp = temp->next;
     } 
     //Adding the block transaction Sender and recirver ids and the transaction amount
     //and considering the remainder when divided by the block number.
     if (hashkey.hashval_2 % 4  == 3 || hashkey.hashval_2 % 4  == 1)
     {
-    hashkey.hashval = hashkey.hashval << (hashkey.hashval_2 % 4);
+        hashkey.hashval = hashkey.hashval << (hashkey.hashval_2 % 4);
     }
     else
     {
-    hashkey.hashval = hashkey.hashval >> (hashkey.hashval_2 % 4);
+        hashkey.hashval = hashkey.hashval >> (hashkey.hashval_2 % 4);
     }
     //taking the 2 values we got above and performing bit shifting on them
     
