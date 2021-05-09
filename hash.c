@@ -27,11 +27,13 @@ ElemType Hash(Block B)
     hashkey.hashval = hashkey.hashval >> (hashkey.hashval_2 % 4);
     }
     //taking the 2 values we got above and performing bit shifting on them
+    
     B->hash_val = hashkey.hashval * (B->prev_block_hash + 1) + (B->block_num) * (B->block_num);
     //taking the above value and multiplying it to the prev-block hash . 
     //added 1 as the prev-block hash for the first block is 0 which would have 
     //resulted in making hasval*prev_block_hash = 0
     //then added square of blocknumber to it
+    
     free(temp);//freeing the dynamic errory
     return B->hash_val;
     //returning the obtained hash value
