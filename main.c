@@ -321,26 +321,43 @@ int main()
 				goto invalid_command;
 
 			case 'p':
-				if( command[1] == '\0' || !strcmp( command, "history" ) )
+				if( command[1] == '\0' || !strcmp( command, "past" ) )
 				{
 					printf("Enter the user ID: ");
 					int uid;	
 					scanf("%d", &uid);
-					Users temp = find_user(userlist, uid);
+					Users user = find_user(userlist, uid);
 					
-					if( temp == NULL )
+					if( user == NULL )
 					{
 						red();
 						printf("Error: user ID doesn't exist\n");
 						reset();
-					}
-					else
-					{	
-						white();
-						trans_history( temp );
-						reset();
+						break;
 					}
 
+					Transact temp = user->T;
+					if (temp == NULL)
+					{
+						red();
+						printf("Transaction History not found!!\n");
+						reset();
+						break;
+					}
+
+					int i = 0;
+					while (temp->next != NULL && i < 5)
+					{
+						white();
+						printf("%d.\n", i + 1);
+						printf("Sender ID : %d\n", temp->S_UID);
+						printf("Reciver ID : %d\n", temp->R_UID);
+						printf("Amount Transfered : %g\n", temp->tr_amount);
+						printf("Time of transaction : %.2d:%.2d\n", temp->time.tm_hour, temp->time.tm_min);
+						temp = temp->next;
+						++i;
+					}
+					reset();
 					break;
 				}
 				goto invalid_command;
