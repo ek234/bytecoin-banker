@@ -30,8 +30,11 @@ void yellow(){
 void blue(){
 	printf("\033[1;34m");
 }
-void cyan(){
+void Bcyan(){
 	printf("\033[1;36m");
+}
+void cyan(){
+	printf("\033[0;30m");
 }
 void white(){
 	printf("\033[1;37m");
@@ -43,10 +46,10 @@ void reset(){
 void printhelp()
 {
 	// help page
-	Bblack();
+	Bcyan();
 	printf("\n\t\t\tWe are here to help you!\n");
 	reset();
-	black();
+	cyan();
 	printf("Instructions: -\nUse the following commands to move ahead:\n");
 	reset();
 	printf("1.\tPress 'register' to register your details.\n");
@@ -109,7 +112,7 @@ int main()
 
 	while(1)
 	{
-		black();
+		blue();
 		printf("\nPlease enter the command: ");
 		char command[command_length];
 		scanf("%s", command);
