@@ -9,7 +9,7 @@ ElemType Hash(Block B)
 {
     hashkey.hashval = B->Nonce;
     //taking the block nonce value
-    Transact temp = (Transact*)malloc(sizeof(struct Transaction));//dynamic allocation of memory to a temporary variable
+    Transact temp = (Transact)malloc(sizeof(struct Transaction));//dynamic allocation of memory to a temporary variable
     temp = B->T->next;
     while(temp != NULL)
     {
