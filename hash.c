@@ -11,10 +11,10 @@ ElemType Hash(Block B)
     hashkey.hashval_2 = (int)(B->T->S_UID + B->T->R_UID + B->T->tr_amount) % B->block_num;
     //Adding the block transaction Sender and recirver ids and the transaction amount
     //and considering the remainder when divided by the block number.
-    if (hashkey.hashval_2 % 3 == 1)
-    hashkey.hashval = hashkey.hashval << (hashkey.hashval_2 % 3);
+    if (hashkey.hashval_2 % 4  == 3 || hashkey.hashval_2 % 4  == 1)
+    hashkey.hashval = hashkey.hashval << (hashkey.hashval_2 % 4);
     else
-    hashkey.hashval = hashkey.hashval >> (hashkey.hashval_2 % 3);
+    hashkey.hashval = hashkey.hashval >> (hashkey.hashval_2 % 4);
     //taking the 2 values we got above and performing bit shifting on them
     B->hash_val = hashkey.hashval * (B->prev_block_hash + 1) + (B->block_num) * (B->block_num);
     //taking the above value and multiplying it to the prev-block hash . 
@@ -24,3 +24,4 @@ ElemType Hash(Block B)
     return B->hash_val;
     //returning the obtained hash value
 }
+
