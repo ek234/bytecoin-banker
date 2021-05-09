@@ -1,6 +1,7 @@
 #include "bitcoin.h"
 #include "trans.h"
 #include "update_val.h"
+#include <stdlib.h>
 
 struct Hashkey hashkey;
 //hash function
