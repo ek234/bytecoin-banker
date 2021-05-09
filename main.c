@@ -380,7 +380,7 @@ int main()
 			default:
 				invalid_command:
 				red();
-				printf("Command not recognized. Refer to help page:\n\n");
+				printf("\nCommand not recognized. Refer to help page:\n\n");
 				reset();
 				printhelp();
 
