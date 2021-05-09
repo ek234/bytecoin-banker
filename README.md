@@ -1,5 +1,5 @@
 # Bitcoin
-<img src="iiit-coin.jgp" alt="drawing" width="200px;">  
+<img src="./iiit-coin.jgp" alt="drawing" width="200px;">  
 
 ## This is a group project made during DSA course at IIIT-H.  
 - There will be a total of *10 billion* bitcoins of which can be bought by users.   
