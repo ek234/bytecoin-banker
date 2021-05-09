@@ -79,7 +79,7 @@ int main()
 	usr_no = 100000;
 	// array of ptrs of userslist struct
 	Users* userlist = (Users*) malloc( usr_no*sizeof(Users) );
-	for( int i=0; i<(signed)usr_no; i++ )
+	for( unsigned int i=0; i<usr_no; i++ )
 	{
 		userlist[i] = NULL;
 	}
@@ -276,6 +276,7 @@ int main()
 							blue();
 							printf("Sorry. Mine unsuccessful.\n");
 							reset();
+						}
 					}
 					break;
 				}
@@ -285,7 +286,7 @@ int main()
 				if( command[1] == '\0' || !strcmp( command, "check" ) )
 				{
 					bit_value = upd_val( &net_data, bit_value );
-					printf("Current Value of bitcoin: %lf\n", bit_value);
+					printf("Current Value of bitcoin: $%g\n", bit_value);
 					break;
 				}
 				goto invalid_command;
@@ -404,15 +405,17 @@ int main()
 		}
 	}
 
+exit:;
+
 	// freeing users
-	for( int i = 0; i < (signed)usr_no; i++ )
+	for( unsigned int i = 0; i < usr_no; i++ )
 		if( userlist[i] != NULL )
 		{
 			free( userlist[i] );
 		}
 		
 	cyan();
-exit:
+
 	printf("Thank you for using %s\n\n", APP_NAME);
 
     return 0;
