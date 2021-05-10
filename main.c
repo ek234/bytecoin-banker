@@ -29,10 +29,10 @@ int main()
 	double bit_value = 100;
 	// struct containing overhead data about number of users and number of transactions
 	data net_data;
-    net_data.old_usr = 0;
-    net_data.new_usr = 0;
-    net_data.old_trans = 0;
-    net_data.new_trans = 0;
+	net_data.old_usr = 0;
+	net_data.new_usr = 0;
+	net_data.old_trans = 0;
+	net_data.new_trans = 0;
 	Transact head_trans = (Transact)malloc(sizeof(Transaction));
 	head_trans->next = NULL;
 
