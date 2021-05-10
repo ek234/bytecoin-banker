@@ -2,6 +2,7 @@
 #include "trans.h"
 #include "update_val.h"
 #include <stdlib.h>
+
 struct Hashkey hashkey;
 //hash function
 //will be calculated after completing 50 transactions
