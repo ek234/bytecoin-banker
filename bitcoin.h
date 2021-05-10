@@ -62,13 +62,14 @@ struct Hashkey{
 
 //initializing the blockarray
 void initBlockArray();
+
 //updating the blockarray whenever a new block is added to the chain
 void updateBlockArray(Block *Bl);
 
 //creates the first block in the blockchain
 Block emptyBlock(Transact T);
 
-
+//updates the blockchain, takes block num ans header to transaction linked list as parameters and returns the pointer to the current block.
 Block initBlock(int block_num, Transact T);
 
 //The Hash Function designed using the block variables and returns the hash_value
