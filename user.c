@@ -76,7 +76,7 @@ int mine(Users user)
     if (coin_left < MINE_AMOUNT)
         return -1;
 
-    bool success = rand() % 2;
+    int success = rand() % 2;
 
     // if mine is not successful
     if (success == 0)
