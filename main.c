@@ -266,7 +266,7 @@ int main()
 
 					bit_value = upd_val( &net_data, bit_value );
 					double bal = delete_user(userlist, uid, bit_value);
-					if( bal==-1 )
+					if( bal==-1.0 )
 					{
 						red();
 						printf("Error: user ID doesn't exist\n");
