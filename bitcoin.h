@@ -80,7 +80,7 @@ Block createBlock(Transact T, int block_num);
 //For attacking the blockchain
 int Attack();
 
-
+//Check if Block-chain is valid.
 bool Validate();
 
 #endif
