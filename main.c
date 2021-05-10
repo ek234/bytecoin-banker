@@ -217,7 +217,7 @@ int main()
 					}
 					else
 					{	
-						bool mined = mine( temp_user );
+						int mined = mine( temp_user );
 
 						if( mined == 1 )
 						{
