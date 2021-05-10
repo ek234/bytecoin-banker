@@ -433,6 +433,19 @@ exit:;
 		{
 			free( userlist[i] );
 		}
+
+	for( int i=0; i<block_num; i++ )
+		if( PtrBlock[i] != NULL )
+		{
+			Traksact t = PtrBlock[i]->T;
+			while( t!=NULL )
+			{
+				Transact tmp = t;
+				t = t->next;
+				free( tmp );
+			}
+			free( PtrBlock[i] );
+		}
 		
 	cyan();
 
