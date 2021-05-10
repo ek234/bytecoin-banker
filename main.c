@@ -433,6 +433,13 @@ exit:;
 	for( unsigned int i = 0; i < usr_no; i++ )
 		if( userlist[i] != NULL )
 		{
+			Transact t = userlist[i]->T;
+			while( t!=NULL )
+			{
+				Transact tmp = t;
+				t = t->next;
+				free( tmp );
+			}
 			free( userlist[i] );
 		}
 	free( userlist );
