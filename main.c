@@ -116,6 +116,7 @@ int main()
 						reset();
 						break;
 					}
+					while(getchar() != '\n');
 					
 					Transact current_transaction = transfer( &a, &b, amount);
 					if(amount > 50)
@@ -263,6 +264,7 @@ int main()
 						printf("Error: user ID doesn't exist\n");
 						reset();
 					}
+					while(getchar() != '\n');
 
 					bit_value = upd_val( &net_data, bit_value );
 					double bal = delete_user(userlist, uid, bit_value);
@@ -278,7 +280,7 @@ int main()
 						green();
 						printf("Account successfully unregistered.\n");
 						reset();
-						printf("Returning balance: $%lf\n", bal);
+						printf("Returning balance: $%g\n", bal);
 					}
 					break;
 				}
@@ -315,7 +317,7 @@ int main()
 						printf("User added successfully\n");
 						reset();
 						printf("User id: %.7d\n", temp -> UID);
-						printf("Intial balance: %lg\n", temp -> balance);
+						printf("Intial balance: %g\n", temp -> balance);
 						printf("Joining time: %.2d:%.2d\n", temp->join_time.tm_hour, temp->join_time.tm_min);
 						net_data.new_usr++;
 						bit_value = upd_val(&net_data,bit_value);
@@ -388,8 +390,8 @@ int main()
 					{
 						white();
 						printf("%d.\n", i + 1);
-						printf("Sender ID : %d\n", temp->S_UID);
-						printf("Reciver ID : %d\n", temp->R_UID);
+						printf("Sender ID : %.7d\n", temp->S_UID);
+						printf("Reciver ID : %.7d\n", temp->R_UID);
 						printf("Amount Transfered : %g\n", temp->tr_amount);
 						printf("Time of transaction : %.2d:%.2d\n", temp->time.tm_hour, temp->time.tm_min);
 						temp = temp->next;
@@ -433,6 +435,14 @@ exit:;
 		{
 			free( userlist[i] );
 		}
+	free( userlist );
+
+	while( head_trans != NULL )
+	{
+		Transact tmp = head_trans;
+		head_trans = head_trans->next;
+		free( tmp );
+	}
 		
 	cyan();
 
