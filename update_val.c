@@ -23,7 +23,7 @@ double upd_val(data_ptr detail, double val)
 
     /*///////////////////////////////////////////////////////////////////////////////////////
     *                                                                                       * 
-    *   Value of bitcoin depends on two factors here                                        *
+    *   Value of bytecoin depends on two factors here                                        *
     *   1. If no of users increase ==> demand increase ==> increase value                    *   
     *   2. If more bigger transactions are there, it means people did'nt tend to keep       *   
     *      coin ==> value decreases                                                         *

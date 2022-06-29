@@ -3,7 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include <assert.h>
-#include "./bitcoin.h"
+#include "./bytecoin.h"
 
 #define NONCE_SIZE 500
 #define BLOCK_SIZE 50
@@ -11,7 +11,7 @@
 
 //Array containing nonce and pointer to block corresponding to the index.
 //Blocks accesible in O(1) time
-struct Array PtrBlock[51];
+Array PtrBlock[51];
 
 //intialising PtrBlock[]
 //called in main
@@ -40,7 +40,7 @@ void updateBlockArray(Block *Bl) //pointer to pointer to blockchain
 //creates the first block in the blockchain
 //accepts the header to the transaction linked list
 //returb pointer to the block
-Block emptyBlock(Transact T)
+Block emptyBlock(Transact T, Block tail, Block head)
 {
     Block B = (Block)malloc(sizeof(BlockChain)); //allocating memory for block
     assert(B != NULL);
@@ -66,7 +66,7 @@ Block emptyBlock(Transact T)
 //called by createBlock() to update the blockchain
 //takes block num ans header to transaction linked list as parameters
 //returns the pointer to the current block
-Block initBlock(int block_num, Transact T) //will be called by initBlock during the update process of the blockchain->
+Block initBlock(int block_num, Transact T, Block tail) //will be called by initBlock during the update process of the blockchain->
 {
     Block B = (Block)malloc(sizeof(BlockChain)); //allocating memory for the block
     assert(B != NULL);
@@ -94,9 +94,9 @@ Block initBlock(int block_num, Transact T) //will be called by initBlock during 
 //header to the transaction linked list and the block number is passed
 //calls initBlock() to update the blockchain
 //returns pointer to current block (tail of the blockchain)
-Block createBlock(Transact T, int block_num)
+Block createBlock(Transact T, int block_num, Block tail)
 {
-    Block current = initBlock(block_num, T); //calling initBlock()
+    Block current = initBlock(block_num, T, tail); //calling initBlock()
 
  //   current->T = T; //adding header of transaction linked list to the block
 
@@ -107,7 +107,7 @@ Block createBlock(Transact T, int block_num)
 //randomly generates a number; if a block with that block num exists, we modify it's nonce
 //this means that the hash val becoomes incorrect( value of nonce changes) and hence the blockchain becomes invalid
 //we can access the block in O(1) time because of PtrBlock()
-int Attack()
+int Attack( Block tail, Block head )
 {
     if(head == NULL)
         return -1;
@@ -135,7 +135,7 @@ int Attack()
     return -1; //no block was attacked
 }
 
-bool Validate()
+bool Validate( Block tail )
 {
     bool flag_invalid_chain = 0;
     

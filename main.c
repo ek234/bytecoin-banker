@@ -1,5 +1,32 @@
 #include "./main.h"
 
+void printhelp()
+{
+	// help page
+	Bcyan();
+	printf("\n\t\tWe are here to help you!\n");
+	reset();
+	cyan();
+	printf("\nInstructions: -\nUse the following commands to move ahead:\n");
+	reset();
+	printf("1.\tPress 'attack' to see your situation with the equity (Attack).\n");
+	printf("2.\tPress 'balance' to check the balance no. of bytecoins.\n");
+	printf("3.\tPress 'check' to check the value of 1 bytecoin with respect to $.\n");
+	printf("4.\tPress 'help' to return to the set of instructions.\n");
+	printf("5.\tPress 'past' to display upto the last 5 transaction of a user\n");
+	printf("6.\tPress 'mine' to mine bytecoins.\n");
+	printf("7.\tPress 'register' to register your details.\n");
+	printf("8.\tPress 'transfer' to fill your transaction details.\n");
+	printf("9.\tPress 'unregister' to remove your details from the list.\n");
+	printf("10.\tPress 'validity' to check the validity of your Block Chain.\n");
+	printf("11.\tPress 'exit' to exit from the page.\n");
+	printf("Note: in %s v0.5+, users can select only the first alphabet of the command.\n", APP_NAME);
+	printf("\n%s v0.7.0\n", APP_NAME);
+	cyan();
+	printf("\n\t  Have a smooth Experience here. Stay Safe🌻\n");
+	reset();
+}
+
 int main()
 {
 
@@ -9,7 +36,7 @@ int main()
 //	inits
 
 	// max number of users that can be managed at the start of the program
-	usr_no = 100000;
+	unsigned int usr_no = 100000;
 	// array of ptrs of userslist struct
 	Users* userlist = (Users*) malloc( usr_no*sizeof(Users) );
 	for( unsigned int i=0; i<usr_no; i++ )
@@ -18,15 +45,16 @@ int main()
 	}
 
 	// head and tail of the block chain
-	head = tail = NULL;
+	Block head = NULL;
+	Block tail = NULL;
 	// number of blocks currently in the chain
 	int block_num = 0;
 	initBlockArray();
 	// number of transactions in the current block
 	int Ntransactions = 0;
 
-	// the value of bitcoin wrt $
-	double bit_value = 100;
+	// the value of bytecoin wrt $
+	double byte_value = 100;
 	// struct containing overhead data about number of users and number of transactions
 	data net_data;
 	net_data.old_usr = 0;
@@ -64,7 +92,7 @@ int main()
 					printf("\t\t\tATTACK!!!\n");
 					reset();
 
-					int x = Attack();
+					int x = Attack(tail, head);
 					if( x == -1 ){
 						red();
 						printf("Attack failed :(\n");
@@ -74,7 +102,7 @@ int main()
 						green();
 						printf("Successful att4ck. Compromised block number: %d\n", x);
 						reset();
-						bit_value = after_attack(bit_value);
+						byte_value = after_attack(byte_value);
 					}
 
 					break;
@@ -97,7 +125,7 @@ int main()
 						scanf("%d", &s_uid);
 						while(getchar() != '\n');
 						// finding sender
-						a = find_user(userlist, s_uid);
+						a = find_user(userlist, s_uid, usr_no);
 					} while( a == NULL && printf("Invalid UID\n") );
 					// taking reciever's UID until it's valid
 					do{
@@ -105,7 +133,7 @@ int main()
 						scanf("%d", &r_uid);
 						while(getchar() != '\n');
 						// finding reciever
-						b = find_user(userlist, r_uid);
+						b = find_user(userlist, r_uid, usr_no);
 					} while( (b == NULL || r_uid == s_uid) && printf("Invalid UID\n") );
 					printf("Enter coin to transfer: ");
 					
@@ -143,11 +171,11 @@ int main()
 						{//	if the 50 transactions are comopleted tehn make a new block.
 							if(tail == NULL )
 							{
-								emptyBlock(head_trans);
+								emptyBlock(head_trans, tail, head);
 								block_num = 1;
 							}
 							else
-								createBlock(head_trans, block_num++);
+								createBlock(head_trans, block_num++, tail);
 							head_trans->next = NULL;
 							Ntransactions = 1;
 						}
@@ -157,7 +185,7 @@ int main()
 						
 						green();
 						printf("Transaction was successful.\n");
-						bit_value = upd_val(&net_data,bit_value);
+						byte_value = upd_val(&net_data,byte_value);
 						reset();
 					}
 					break;
@@ -177,7 +205,7 @@ int main()
 					}
 
 					while(getchar() != '\n');
-					Users temp = find_user(userlist, uid);
+					Users temp = find_user(userlist, uid, usr_no);
 					
 					if( temp == NULL )
 					{
@@ -189,7 +217,7 @@ int main()
 					{	
 						double bal = temp -> balance;
 						white();
-						printf("Current balance: %g Bitcoin\n", bal);
+						printf("Current balance: %g Bytecoin\n", bal);
 						reset();
 					}
 					break;
@@ -208,7 +236,7 @@ int main()
 						reset();
 					}
 					while(getchar() != '\n');
-					Users temp_user = find_user(userlist, uid);
+					Users temp_user = find_user(userlist, uid, usr_no);
 					
 					if( temp_user == NULL )
 					{
@@ -224,14 +252,14 @@ int main()
 						{
 							//yellow();
 							green();
-							printf("Congratulations!! You successfully mined bitcoins.\n");
+							printf("Congratulations!! You successfully mined bytecoins.\n");
 							reset();
 							double bal = temp_user -> balance;
-							printf("Current balance in your account: %g Bitcoin\n", bal);
+							printf("Current balance in your account: %g bytecoin\n", bal);
 						}
 						else if( mined==-1 ){
 							red();
-							printf("Sorry. Not enough bitcoins left.\n");
+							printf("Sorry. Not enough bytecoins left.\n");
 							reset();
 						}
 						else{
@@ -247,8 +275,8 @@ int main()
 			case 'c':
 				if( command[1] == '\0' || !strcmp( command, "check" ) )
 				{
-					bit_value = upd_val( &net_data, bit_value );
-					printf("Current Value of bitcoin: $%g\n", bit_value);
+					byte_value = upd_val( &net_data, byte_value );
+					printf("Current Value of bytecoin: $%g\n", byte_value);
 					break;
 				}
 				goto invalid_command;
@@ -266,8 +294,8 @@ int main()
 					}
 					while(getchar() != '\n');
 
-					bit_value = upd_val( &net_data, bit_value );
-					double bal = delete_user(userlist, uid, bit_value);
+					byte_value = upd_val( &net_data, byte_value );
+					double bal = delete_user(userlist, uid, byte_value, usr_no);
 					if( bal==-1.0 )
 					{
 						red();
@@ -291,7 +319,7 @@ int main()
 				{
 					// if the number of users are large enough then double the array
 					if( 10*net_data.new_trans > 7*usr_no )
-						double_user( userlist );
+						double_user( userlist, &usr_no );
 
 					printf("Enter the initial amount to deposit: $");
 					double x;	
@@ -304,11 +332,11 @@ int main()
 						reset();
 						break;
 					}
-					Users temp = register_usr(userlist, x, bit_value);
+					Users temp = register_usr(userlist, x, byte_value, usr_no);
 
 					if( temp==NULL ){
 						red();
-						printf("Sorry. Not enough bitcoins left.\n");
+						printf("Sorry. Not enough bytecoins left.\n");
 						reset();
 					}
 					else
@@ -320,7 +348,7 @@ int main()
 						printf("Intial balance: %g\n", temp -> balance);
 						printf("Joining time: %.2d:%.2d\n", temp->join_time.tm_hour, temp->join_time.tm_min);
 						net_data.new_usr++;
-						bit_value = upd_val(&net_data,bit_value);
+						byte_value = upd_val(&net_data,byte_value);
 					}
 
 					break;
@@ -331,7 +359,7 @@ int main()
 				if( command[1]=='\0' || !strcmp( command, "validity" ) )
 				{
 					bool v;
-					v = Validate();
+					v = Validate(tail);
 					printf("--:Checking Validity:--\n");
 					if(v == 0){
 						green();
@@ -366,7 +394,7 @@ int main()
 						reset();
 					}
 					while(getchar() != '\n');
-					Users user = find_user(userlist, uid);
+					Users user = find_user(userlist, uid, usr_no);
 					
 					if( user == NULL )
 					{
